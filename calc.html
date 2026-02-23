@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Агролесные Углеродные Проекты | QazaqCarbon</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1a3a1f;
+    --leaf: #2d6a4f;
+    --sage: #52b788;
+    --mist: #b7e4c7;
+    --earth: #8b5e3c;
+    --sand: #f4e9d8;
+    --ivory: #faf8f3;
+    --ink: #1a1a1a;
+    --gold: #c9a84c;
+    --smoke: #6b7c6b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--ivory);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(250,248,243,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(45,106,79,0.15);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--forest);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-logo span { color: var(--sage); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--smoke);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--leaf); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--forest) 0%, var(--leaf) 60%, var(--sage) 100%);
+    clip-path: polygon(0 0, 55% 0, 45% 100%, 0 100%);
+    z-index: 0;
+  }
+  .hero-left {
+    position: relative; z-index: 1;
+    padding: 6rem 4rem 4rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+    color: white;
+  }
+  .hero-tag {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--mist);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-tag::before {
+    content: ''; display: block;
+    width: 2.5rem; height: 1px; background: var(--mist);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.05; font-weight: 900;
+    margin-bottom: 2rem;
+  }
+  .hero-title em { font-style: italic; color: var(--mist); }
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.75;
+    color: rgba(255,255,255,0.8);
+    max-width: 420px; margin-bottom: 3rem;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    padding: 1rem 2rem;
+    background: var(--gold);
+    color: var(--forest); font-weight: 600;
+    font-size: 0.9rem; letter-spacing: 0.04em;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.3s; font-family: inherit;
+  }
+  .hero-cta:hover { background: #e0be6a; transform: translateY(-2px); }
+  .hero-right {
+    position: relative; z-index: 1;
+    padding: 6rem 3rem 4rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin-top: 2rem;
+  }
+  .stat-card {
+    background: white;
+    border: 1px solid rgba(45,106,79,0.12);
+    padding: 1.8rem;
+    position: relative;
+    animation: fadeUp 0.6s ease forwards;
+    opacity: 0;
+  }
+  .stat-card:nth-child(1) { animation-delay: 0.1s; }
+  .stat-card:nth-child(2) { animation-delay: 0.2s; }
+  .stat-card:nth-child(3) { animation-delay: 0.3s; }
+  .stat-card:nth-child(4) { animation-delay: 0.4s; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem; font-weight: 900;
+    color: var(--leaf); line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .stat-label {
+    font-size: 0.78rem; font-weight: 500;
+    color: var(--smoke); letter-spacing: 0.05em;
+    text-transform: uppercase; line-height: 1.4;
+  }
+  .stat-bar {
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--sage);
+  }
+  .hero-right-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem; font-weight: 700;
+    color: var(--forest); line-height: 1.2;
+  }
+  .hero-right-title span { color: var(--sage); }
+
+  /* SECTION STYLES */
+  section { padding: 7rem 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 3rem; }
+  .section-tag {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--sage);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-tag::before {
+    content: ''; display: block;
+    width: 2rem; height: 1px; background: var(--sage);
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 900; color: var(--forest);
+    line-height: 1.1; margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--sage); }
+
+  /* ABOUT PROJECT */
+  .about { background: var(--sand); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start; margin-top: 3rem;
+  }
+  .about-text p {
+    font-size: 1rem; line-height: 1.85;
+    color: var(--smoke); margin-bottom: 1.5rem;
+  }
+  .about-text strong { color: var(--forest); }
+  .about-features { display: flex; flex-direction: column; gap: 1.2rem; }
+  .feature-item {
+    display: flex; gap: 1.2rem;
+    padding: 1.5rem;
+    background: white;
+    border-left: 3px solid var(--sage);
+    transition: transform 0.2s;
+  }
+  .feature-item:hover { transform: translateX(4px); }
+  .feature-icon {
+    font-size: 1.8rem; flex-shrink: 0;
+    width: 3rem; text-align: center;
+  }
+  .feature-title {
+    font-weight: 600; color: var(--forest);
+    margin-bottom: 0.3rem; font-size: 0.95rem;
+  }
+  .feature-desc {
+    font-size: 0.85rem; color: var(--smoke); line-height: 1.6;
+  }
+
+  /* PROJECT TYPES */
+  .project-types { background: var(--forest); }
+  .project-types .section-title { color: white; }
+  .project-types .section-tag { color: var(--mist); }
+  .project-types .section-tag::before { background: var(--mist); }
+  .types-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .type-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(183,228,199,0.2);
+    padding: 2.5rem;
+    position: relative; overflow: hidden;
+    transition: all 0.3s;
+  }
+  .type-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, var(--sage), transparent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .type-card:hover { background: rgba(255,255,255,0.1); }
+  .type-card:hover::before { transform: scaleX(1); }
+  .type-icon {
+    font-size: 2.5rem; margin-bottom: 1.5rem; display: block;
+  }
+  .type-label {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--sage);
+    margin-bottom: 0.8rem;
+  }
+  .type-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: white; margin-bottom: 1rem; line-height: 1.2;
+  }
+  .type-desc {
+    font-size: 0.88rem; color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+  }
+  .type-species {
+    margin-top: 1.5rem; padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .type-species-label {
+    font-size: 0.7rem; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--mist);
+    margin-bottom: 0.6rem;
+  }
+  .species-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .species-tag {
+    font-size: 0.75rem; padding: 0.2rem 0.6rem;
+    background: rgba(82,183,136,0.2);
+    border: 1px solid rgba(82,183,136,0.3);
+    color: var(--mist); font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* AKBAY EXAMPLE */
+  .akbay { background: white; }
+  .akbay-grid {
+    display: grid; grid-template-columns: 5fr 4fr;
+    gap: 4rem; align-items: start; margin-top: 3rem;
+  }
+  .akbay-map {
+    background: var(--forest);
+    padding: 2rem; position: relative;
+    min-height: 350px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .akbay-map-title {
+    font-family: 'Playfair Display', serif;
+    color: white; font-size: 1.1rem; margin-bottom: 1.5rem;
+  }
+  .field-diagram {
+    display: grid;
+    gap: 4px;
+    flex: 1;
+  }
+  .field-row {
+    display: grid; grid-template-columns: 2fr 3fr 2fr 3fr 2fr;
+    gap: 4px; height: 28px;
+  }
+  .tree-strip {
+    background: linear-gradient(180deg, var(--leaf), var(--sage));
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.5rem;
+  }
+  .crop-strip {
+    background: rgba(201,168,76,0.25);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 2px;
+  }
+  .diagram-legend {
+    display: flex; gap: 1.5rem; margin-top: 1.2rem;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; color: rgba(255,255,255,0.7);
+  }
+  .legend-dot {
+    width: 12px; height: 12px; border-radius: 2px;
+  }
+  .akbay-specs { }
+  .spec-row {
+    display: flex; justify-content: space-between;
+    align-items: baseline;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(45,106,79,0.1);
+  }
+  .spec-key {
+    font-size: 0.82rem; color: var(--smoke); font-weight: 500;
+  }
+  .spec-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem; font-weight: 500; color: var(--forest);
+    text-align: right;
+  }
+  .akbay-carbon-preview {
+    margin-top: 2rem; padding: 1.8rem;
+    background: var(--forest);
+    color: white;
+  }
+  .carbon-preview-title {
+    font-size: 0.72rem; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--mist);
+    margin-bottom: 1rem;
+  }
+  .carbon-preview-nums {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .cpn-item .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 900; color: var(--mist);
+  }
+  .cpn-item .unit {
+    font-size: 0.7rem; color: rgba(255,255,255,0.5);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .cpn-item .label {
+    font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 0.2rem;
+  }
+
+  /* CALCULATOR */
+  .calculator-section { background: var(--sand); }
+  .calc-intro { max-width: 650px; margin-bottom: 3rem; }
+  .calc-intro p { font-size: 1rem; color: var(--smoke); line-height: 1.8; }
+  .calc-wrapper {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: start;
+  }
+  .calc-form {
+    background: white;
+    padding: 3rem;
+    border-top: 3px solid var(--sage);
+  }
+  .calc-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--forest); margin-bottom: 2rem;
+  }
+  .form-group { margin-bottom: 1.8rem; }
+  .form-group label {
+    display: block; font-size: 0.8rem;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--forest);
+    margin-bottom: 0.6rem;
+  }
+  .form-group select,
+  .form-group input[type="number"],
+  .form-group input[type="range"] {
+    width: 100%; padding: 0.85rem 1rem;
+    border: 1px solid rgba(45,106,79,0.2);
+    background: var(--ivory); color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.95rem;
+    outline: none; transition: border-color 0.2s;
+    appearance: none; -webkit-appearance: none;
+  }
+  .form-group select:focus,
+  .form-group input:focus {
+    border-color: var(--sage);
+  }
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232d6a4f' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+  .range-wrap { display: flex; align-items: center; gap: 1rem; }
+  input[type="range"] {
+    flex: 1; padding: 0; height: 4px;
+    background: linear-gradient(to right, var(--sage) 0%, var(--sage) var(--val, 50%), rgba(45,106,79,0.2) var(--val, 50%));
+    border: none; cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none; width: 18px; height: 18px;
+    background: var(--leaf); border-radius: 50%;
+    cursor: pointer; border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  .range-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem; font-weight: 500;
+    color: var(--leaf); min-width: 3.5rem; text-align: right;
+  }
+  .species-selector {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .species-check {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid rgba(45,106,79,0.2);
+    cursor: pointer; transition: all 0.2s;
+    user-select: none;
+  }
+  .species-check input { display: none; }
+  .species-check.selected {
+    background: rgba(82,183,136,0.1);
+    border-color: var(--sage);
+  }
+  .species-check .checkmark {
+    width: 16px; height: 16px; border: 1.5px solid rgba(45,106,79,0.3);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all 0.2s;
+  }
+  .species-check.selected .checkmark {
+    background: var(--sage); border-color: var(--sage);
+    color: white; font-size: 0.7rem;
+  }
+  .species-check .sp-name {
+    font-size: 0.8rem; color: var(--ink);
+    line-height: 1.3;
+  }
+  .species-check .sp-sci {
+    font-size: 0.68rem; color: var(--smoke);
+    font-style: italic;
+  }
+  .species-warning {
+    font-size: 0.78rem; color: var(--earth);
+    margin-top: 0.5rem; display: none;
+  }
+  .calc-btn {
+    width: 100%; padding: 1.1rem;
+    background: var(--forest); color: white;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border: none; cursor: pointer;
+    margin-top: 0.5rem; transition: background 0.2s;
+  }
+  .calc-btn:hover { background: var(--leaf); }
+  .calc-btn:disabled { background: var(--smoke); cursor: not-allowed; }
+  .note {
+    font-size: 0.75rem; color: var(--smoke);
+    margin-top: 0.8rem; line-height: 1.6;
+    padding: 0.8rem; background: rgba(45,106,79,0.05);
+    border-left: 2px solid var(--mist);
+  }
+
+  /* RESULTS */
+  .calc-results {
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .results-header {
+    background: var(--forest); color: white; padding: 2rem;
+  }
+  .results-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; margin-bottom: 0.5rem;
+  }
+  .results-header p {
+    font-size: 0.8rem; opacity: 0.6; line-height: 1.5;
+  }
+  .result-card {
+    background: white; padding: 1.8rem;
+    border-left: 3px solid var(--sage);
+    opacity: 0; transform: translateY(10px);
+    transition: all 0.4s;
+  }
+  .result-card.visible {
+    opacity: 1; transform: translateY(0);
+  }
+  .result-label {
+    font-size: 0.72rem; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--smoke);
+    margin-bottom: 0.5rem; font-weight: 600;
+  }
+  .result-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem; font-weight: 900;
+    color: var(--leaf); line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .result-unit {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem; color: var(--smoke);
+  }
+  .result-card.highlight { border-left-color: var(--gold); }
+  .result-card.highlight .result-number { color: var(--earth); }
+  .timeline-bar {
+    background: var(--ivory); padding: 1.5rem;
+  }
+  .timeline-bar h4 {
+    font-size: 0.8rem; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--smoke);
+    margin-bottom: 1rem;
+  }
+  .timeline-years {
+    display: flex; gap: 0.3rem; align-items: flex-end;
+    height: 80px;
+  }
+  .timeline-year {
+    flex: 1; background: var(--sage);
+    border-radius: 2px 2px 0 0;
+    position: relative; min-height: 4px;
+    transition: height 0.6s ease; cursor: pointer;
+  }
+  .timeline-year:hover::after {
+    content: attr(data-tip);
+    position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+    background: var(--forest); color: white;
+    font-size: 0.68rem; padding: 0.3rem 0.5rem;
+    white-space: nowrap; pointer-events: none;
+    margin-bottom: 4px;
+  }
+  .timeline-labels {
+    display: flex; justify-content: space-between;
+    margin-top: 0.4rem;
+    font-size: 0.65rem; color: var(--smoke);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .warning-box {
+    background: rgba(139,94,60,0.08);
+    border: 1px solid rgba(139,94,60,0.2);
+    padding: 1rem 1.2rem;
+    font-size: 0.82rem; color: var(--earth);
+    line-height: 1.6; display: none;
+  }
+  .methodology {
+    padding: 1.5rem; background: rgba(45,106,79,0.05);
+    border: 1px solid rgba(45,106,79,0.1);
+  }
+  .methodology h4 {
+    font-size: 0.78rem; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--leaf);
+    margin-bottom: 0.8rem;
+  }
+  .methodology p {
+    font-size: 0.78rem; color: var(--smoke);
+    line-height: 1.65;
+  }
+  .placeholder-state {
+    text-align: center; padding: 4rem 2rem;
+    color: var(--smoke);
+  }
+  .placeholder-state .icon {
+    font-size: 3rem; margin-bottom: 1.5rem; opacity: 0.3;
+  }
+  .placeholder-state p { font-size: 0.9rem; line-height: 1.7; }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: linear-gradient(135deg, var(--forest), var(--leaf));
+    color: white; text-align: center; padding: 6rem 0;
+  }
+  .cta-section .section-title { color: white; }
+  .cta-section p {
+    font-size: 1.1rem; opacity: 0.8; max-width: 600px;
+    margin: 1.5rem auto 3rem; line-height: 1.8;
+  }
+  .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 1.1rem 2.5rem;
+    background: var(--gold); color: var(--forest);
+    font-weight: 700; font-size: 0.9rem;
+    letter-spacing: 0.05em; text-decoration: none;
+    transition: all 0.3s; font-family: inherit;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: #e0be6a; transform: translateY(-2px); }
+  .btn-outline {
+    padding: 1.1rem 2.5rem;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    color: white; font-weight: 600; font-size: 0.9rem;
+    letter-spacing: 0.05em; text-decoration: none;
+    transition: all 0.3s; font-family: inherit;
+    background: transparent; cursor: pointer;
+  }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,0.5);
+    padding: 3rem; text-align: center;
+  }
+  footer a { color: var(--sage); text-decoration: none; }
+  footer .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: white;
+    margin-bottom: 0.5rem; display: block;
+  }
+  footer .logo span { color: var(--sage); }
+  footer p { font-size: 0.82rem; line-height: 1.7; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-bg { clip-path: polygon(0 0, 100% 0, 100% 60%, 0 100%); }
+    .hero-left { padding: 8rem 2rem 3rem; }
+    .hero-right { padding: 2rem; }
+    .about-grid, .akbay-grid, .calc-wrapper { grid-template-columns: 1fr; }
+    .types-grid { grid-template-columns: 1fr; }
+    .container { padding: 0 1.5rem; }
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://www.qazaqcarbon.com" class="nav-logo">Qazaq<span>Carbon</span></a>
+  <div class="nav-links">
+    <a href="#projects">Проекты</a>
+    <a href="#akbay">Пример: Акбай</a>
+    <a href="#calculator">Калькулятор</a>
+    <a href="#contact">Контакт</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-left">
+    <div class="hero-tag">QazaqCarbon · Агролесные Проекты</div>
+    <h1 class="hero-title">
+      Леса, которые<br><em>генерируют</em><br>стоимость
+    </h1>
+    <p class="hero-desc">
+      Агролесные и лесовосстановительные проекты в Казахстане — 
+      интеграция местных пород деревьев, защита почв, и монетизация 
+      углеродных единиц по международным стандартам.
+    </p>
+    <a href="#calculator" class="hero-cta">
+      Рассчитать потенциал углерода →
+    </a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-title">
+      Минимум 40 лет<br>экологической и<br><span>углеродной ценности</span>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-bar"></div>
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Местных пород деревьев на проект</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-bar"></div>
+        <div class="stat-num">40</div>
+        <div class="stat-label">Лет минимального жизненного цикла</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-bar"></div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Типа проектов: ARR, ветрополосы, агролес</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-bar"></div>
+        <div class="stat-num">CO₂e</div>
+        <div class="stat-label">Верифицированные углеродные единицы</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="projects">
+  <div class="container">
+    <div class="section-tag">О программе</div>
+    <h2 class="section-title">Лесное землепользование как<br><em>углеродный актив</em></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          QazaqCarbon разрабатывает и сопровождает проекты по лесовосстановлению, 
+          агролесоводству и защитным лесополосам на территории Казахстана — 
+          с учётом требований международных углеродных стандартов (Verra VCS, Gold Standard, TREES).
+        </p>
+        <p>
+          Наш подход объединяет <strong>экологическую устойчивость</strong> с 
+          <strong>экономической выгодой</strong> для землевладельцев: деревья 
+          накапливают углерод, который превращается в верифицированные углеродные 
+          единицы (VCU), торгуемые на добровольном рынке.
+        </p>
+        <p>
+          Каждый проект включает не менее <strong>5 видов местных пород деревьев</strong>, 
+          адаптированных к климатической зоне, и рассчитан на жизненный срок 
+          минимум <strong>40 лет</strong>. Учитывается только надземная биомасса 
+          стволов и крон деревьев в соответствии с методологией IPCC.
+        </p>
+      </div>
+      <div class="about-features">
+        <div class="feature-item">
+          <div class="feature-icon">🌲</div>
+          <div>
+            <div class="feature-title">Лесовосстановление и облесение (ARR)</div>
+            <div class="feature-desc">Посадка лесов на деградированных, сельскохозяйственных или безлесных землях. Самый высокий углеродный потенциал.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🌾</div>
+          <div>
+            <div class="feature-title">Агролесоводство</div>
+            <div class="feature-desc">Совместное выращивание сельскохозяйственных культур в междурядьях лесных посадок. Двойной доход: урожай + углерод.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🛡️</div>
+          <div>
+            <div class="feature-title">Ветрозащитные лесополосы</div>
+            <div class="feature-desc">Защита сельхозугодий от ветровой эрозии с одновременным накоплением углерода. Улучшение урожайности соседних полей.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📊</div>
+          <div>
+            <div class="feature-title">Мониторинг и верификация</div>
+            <div class="feature-desc">Полевые измерения, дистанционное зондирование и отчётность для получения верифицированных углеродных единиц.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT TYPES -->
+<section class="project-types">
+  <div class="container">
+    <div class="section-tag">Типы проектов</div>
+    <h2 class="section-title">Три пути к углеродным<br>доходам для землевладельцев</h2>
+    <div class="types-grid">
+
+      <div class="type-card">
+        <span class="type-icon">🌳</span>
+        <div class="type-label">Тип 1 — ARR</div>
+        <div class="type-title">Лесовосстановление и Облесение</div>
+        <div class="type-desc">
+          Afforestation / Reforestation / Revegetation. Создание лесных 
+          насаждений на безлесных территориях. Метод применяется для 
+          деградированных пахотных земель, заброшенных пастбищ и 
+          полупустынных территорий. Высокий потенциал секвестрации.
+        </div>
+        <div class="type-species">
+          <div class="type-species-label">Рекомендуемые породы (степь/полупустыня)</div>
+          <div class="species-tags">
+            <span class="species-tag">Тополь</span>
+            <span class="species-tag">Вяз</span>
+            <span class="species-tag">Акация</span>
+            <span class="species-tag">Лох (джида)</span>
+            <span class="species-tag">Ива</span>
+            <span class="species-tag">Клён</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="type-card">
+        <span class="type-icon">🌿</span>
+        <div class="type-label">Тип 2 — Агролесоводство</div>
+        <div class="type-title">Деревья в Сельскохозяйственном Ландшафте</div>
+        <div class="type-desc">
+          Интеграция лесных культур и кормовых/зерновых культур 
+          в единую систему. Полосы деревьев (6 м) чередуются с 
+          сельхозугодьями (10 м). Пример: проект Акбай, Аральский район — 
+          42 га, 5 пород, 34 986 саженцев.
+        </div>
+        <div class="type-species">
+          <div class="type-species-label">Пример: Акбай (пустыня Кызылорда)</div>
+          <div class="species-tags">
+            <span class="species-tag">Тополь</span>
+            <span class="species-tag">Карагач</span>
+            <span class="species-tag">Джида</span>
+            <span class="species-tag">Ива</span>
+            <span class="species-tag">Клён</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="type-card">
+        <span class="type-icon">💨</span>
+        <div class="type-label">Тип 3 — Ветрополосы</div>
+        <div class="type-title">Защитные Лесные Полосы</div>
+        <div class="type-desc">
+          Линейные лесные насаждения вдоль границ полей для 
+          защиты от ветровой эрозии и суховеев. Дополнительный 
+          эффект — повышение урожайности на прилегающих полях 
+          на 10–30%. Углерод накапливается в стволах и ветвях.
+        </div>
+        <div class="type-species">
+          <div class="type-species-label">Рекомендуемые породы (зерновой пояс)</div>
+          <div class="species-tags">
+            <span class="species-tag">Тополь</span>
+            <span class="species-tag">Вяз</span>
+            <span class="species-tag">Берёза</span>
+            <span class="species-tag">Сосна</span>
+            <span class="species-tag">Облепиха</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AKBAY EXAMPLE -->
+<section class="akbay" id="akbay">
+  <div class="container">
+    <div class="section-tag">Пример реализации</div>
+    <h2 class="section-title">Агролесной проект<br><em>Акбай — Аральский район</em></h2>
+    <div class="akbay-grid">
+      <div>
+        <div class="akbay-map">
+          <div class="akbay-map-title">Схема полос посадок (фрагмент 1 га)</div>
+          <div class="field-diagram" id="fieldDiagram">
+          </div>
+          <div class="diagram-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--sage)"></div>
+              Лесная полоса (6 м)
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background: rgba(201,168,76,0.4); border: 1px solid var(--gold)"></div>
+              Кормовые культуры (10 м)
+            </div>
+          </div>
+        </div>
+        <div class="akbay-carbon-preview">
+          <div class="carbon-preview-title">Прогноз накопления углерода (42 га, 40 лет)</div>
+          <div class="carbon-preview-nums">
+            <div class="cpn-item">
+              <div class="num">~4 200</div>
+              <div class="unit">тонн C</div>
+              <div class="label">Углерод в биомассе (40 лет)</div>
+            </div>
+            <div class="cpn-item">
+              <div class="num">~15 400</div>
+              <div class="unit">tCO₂e</div>
+              <div class="label">Углеродные единицы (эквив. CO₂)</div>
+            </div>
+            <div class="cpn-item">
+              <div class="num">~385</div>
+              <div class="unit">tCO₂e/год</div>
+              <div class="label">Среднегодовая секвестрация</div>
+            </div>
+            <div class="cpn-item">
+              <div class="num">100</div>
+              <div class="unit">tC/га</div>
+              <div class="label">к 40-му году (ср. оценка)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="spec-row">
+          <span class="spec-key">Площадь проекта</span>
+          <span class="spec-val">42,0 га</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Породы деревьев</span>
+          <span class="spec-val">5 видов</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Количество саженцев</span>
+          <span class="spec-val">34 986 шт.</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Плотность посадки</span>
+          <span class="spec-val">833 шт./га</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Ширина лесной полосы</span>
+          <span class="spec-val">6 м</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Ширина кормового разрыва</span>
+          <span class="spec-val">10 м</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Расположение полос</span>
+          <span class="spec-val">С–Ю</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Полив (первые 3 года)</span>
+          <span class="spec-val">Капельный / арычный</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Жизненный срок проекта</span>
+          <span class="spec-val">≥ 40 лет</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Климатическая зона</span>
+          <span class="spec-val">Аридная, Кызылорда</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-key">Регион</span>
+          <span class="spec-val">Аральский р-н</span>
+        </div>
+        <div class="spec-row" style="border-bottom:none">
+          <span class="spec-key">Доп. продукция</span>
+          <span class="spec-val">Кормовые культуры</span>
+        </div>
+        <br>
+        <div style="font-size:0.82rem; color:var(--smoke); line-height:1.75; padding: 1.2rem; background: var(--sand);">
+          <strong style="color:var(--forest)">Технические рекомендации по проекту:</strong><br>
+          Глубина посадочных ям 30–50 см с добавлением компоста. 
+          Мульчирование для снижения испарения. Срезка нижних ветвей 
+          в первые 2–3 года до высоты штамба 130 см — обязательное 
+          условие для корректного измерения углерода по методологии IPCC.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calculator-section" id="calculator">
+  <div class="container">
+    <div class="section-tag">Инструмент для землевладельцев</div>
+    <h2 class="section-title">Калькулятор<br><em>углеродного потенциала</em></h2>
+    <div class="calc-intro">
+      <p>
+        Оцените приблизительное количество углерода и углеродных единиц (CO₂e) 
+        для вашего лесопосадочного проекта. Расчёт основан на надземной биомассе 
+        деревьев согласно методологии IPCC. Это ориентировочная оценка — 
+        точный расчёт выполняется по результатам полевых измерений.
+      </p>
+    </div>
+    <div class="calc-wrapper">
+      <!-- FORM -->
+      <div class="calc-form">
+        <h3>Параметры вашего проекта</h3>
+
+        <div class="form-group">
+          <label>Тип проекта</label>
+          <select id="projectType" onchange="onParamChange()">
+            <option value="arr">Лесовосстановление / Облесение (ARR)</option>
+            <option value="agroforest">Агролесоводство (деревья + культуры)</option>
+            <option value="windbreak">Ветрозащитные лесополосы</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Климатическая зона / Регион</label>
+          <select id="climateZone" onchange="onParamChange()">
+            <option value="arid">Аридная (Кызылорда, Арал, Туркестан)</option>
+            <option value="semiarid">Полуаридная (Актобе, Костанай, Павлодар)</option>
+            <option value="steppe">Степная (Акмола, Карагандинская, СКО)</option>
+            <option value="mountain">Горная / Субальпийская (Алматинская, ВКО)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Площадь посадок (гектаров)</label>
+          <div class="range-wrap">
+            <input type="range" id="areaRange" min="1" max="500" value="42"
+              oninput="syncRange('area')" style="--val:8.2%">
+            <span class="range-val" id="areaVal">42 га</span>
+          </div>
+          <input type="number" id="areaNum" value="42" min="1" max="500"
+            oninput="syncNum('area')" style="margin-top:0.5rem">
+        </div>
+
+        <div class="form-group">
+          <label>Плотность посадки (деревьев / га)</label>
+          <div class="range-wrap">
+            <input type="range" id="densityRange" min="100" max="2500" value="833"
+              oninput="syncRange('density')" style="--val:30.1%">
+            <span class="range-val" id="densityVal">833</span>
+          </div>
+          <input type="number" id="densityNum" value="833" min="100" max="2500"
+            oninput="syncNum('density')" style="margin-top:0.5rem">
+        </div>
+
+        <div class="form-group">
+          <label>Срок проекта (лет)</label>
+          <div class="range-wrap">
+            <input type="range" id="lifeRange" min="40" max="100" value="40"
+              oninput="syncRange('life')" style="--val:0%">
+            <span class="range-val" id="lifeVal">40 лет</span>
+          </div>
+          <input type="number" id="lifeNum" value="40" min="40" max="100"
+            oninput="syncNum('life')" style="margin-top:0.5rem">
+        </div>
+
+        <div class="form-group">
+          <label>Породы деревьев (выберите минимум 5)</label>
+          <div class="species-selector" id="speciesSelector">
+            <!-- dynamically filled -->
+          </div>
+          <div class="species-warning" id="speciesWarning">
+            ⚠ Выберите минимум 5 пород деревьев
+          </div>
+        </div>
+
+        <button class="calc-btn" id="calcBtn" onclick="calculate()">
+          Рассчитать углеродный потенциал
+        </button>
+        <div class="note">
+          Расчёт основан на коэффициентах роста биомассы IPCC (2006) 
+          для лесов умеренного и аридного климата. Учитывается только 
+          надземная биомасса деревьев. Конверсия: 1 тонна C = 3,667 тCO₂e.
+          Фактические значения могут отличаться в зависимости от условий 
+          произрастания, ухода и сохранности насаждений.
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="calc-results" id="calcResults">
+        <div class="placeholder-state" id="placeholderState">
+          <div class="icon">🌱</div>
+          <p>Заполните параметры проекта слева<br>и нажмите «Рассчитать»,<br>чтобы увидеть углеродный потенциал.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="section-tag" style="color:var(--mist); justify-content:center">
+      <span style="width:2rem;height:1px;background:var(--mist);display:block"></span>
+      Следующий шаг
+    </div>
+    <h2 class="section-title">Готовы оценить<br>ваш проект официально?</h2>
+    <p>
+      Наша команда проведёт предварительную оценку вашего земельного участка,
+      разработает концепцию лесопосадок и подберёт подходящую методологию 
+      для верификации углеродных единиц по международным стандартам.
+    </p>
+    <div class="cta-buttons">
+      <a href="mailto:info@qazaqcarbon.com" class="btn-primary">
+        Связаться с нами
+      </a>
+      <a href="https://www.qazaqcarbon.com" class="btn-outline">
+        На главную сайта →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="logo">Qazaq<span>Carbon</span></span>
+  <p>
+    Углеродные проекты в Казахстане · <a href="https://www.qazaqcarbon.com">www.qazaqcarbon.com</a><br>
+    Расчёты носят ориентировочный характер. Для верификации необходимы полевые измерения и аудит по стандартам Verra / Gold Standard.
+  </p>
+</footer>
+
+<script>
+// ========== SPECIES DATA ==========
+const speciesData = {
+  arid: [
+    { id:'poplar', name:'Тополь', sci:'Populus spp.', cat: 0.95 },
+    { id:'ulmus', name:'Карагач (Вяз)', sci:'Ulmus pumila', cat: 0.6 },
+    { id:'elaeagnus', name:'Джида (Лох)', sci:'Elaeagnus angustifolia', cat: 0.4 },
+    { id:'willow', name:'Ива', sci:'Salix spp.', cat: 0.7 },
+    { id:'maple', name:'Клён', sci:'Acer tataricum', cat: 0.5 },
+    { id:'acacia', name:'Акация', sci:'Robinia pseudoacacia', cat: 0.55 },
+    { id:'tamarix', name:'Тамариск', sci:'Tamarix spp.', cat: 0.3 },
+  ],
+  semiarid: [
+    { id:'poplar', name:'Тополь', sci:'Populus spp.', cat: 1.1 },
+    { id:'birch', name:'Берёза', sci:'Betula pendula', cat: 0.7 },
+    { id:'willow', name:'Ива', sci:'Salix spp.', cat: 0.8 },
+    { id:'maple', name:'Клён', sci:'Acer platanoides', cat: 0.65 },
+    { id:'pine', name:'Сосна', sci:'Pinus sylvestris', cat: 0.9 },
+    { id:'acacia', name:'Акация', sci:'Robinia pseudoacacia', cat: 0.6 },
+    { id:'linden', name:'Липа', sci:'Tilia cordata', cat: 0.6 },
+  ],
+  steppe: [
+    { id:'poplar', name:'Тополь', sci:'Populus spp.', cat: 1.2 },
+    { id:'birch', name:'Берёза', sci:'Betula pendula', cat: 0.85 },
+    { id:'oak', name:'Дуб', sci:'Quercus robur', cat: 0.7 },
+    { id:'ash', name:'Ясень', sci:'Fraxinus excelsior', cat: 0.8 },
+    { id:'pine', name:'Сосна', sci:'Pinus sylvestris', cat: 1.05 },
+    { id:'linden', name:'Липа', sci:'Tilia cordata', cat: 0.7 },
+    { id:'elm', name:'Вяз обыкн.', sci:'Ulmus glabra', cat: 0.65 },
+  ],
+  mountain: [
+    { id:'spruce', name:'Ель', sci:'Picea schrenkiana', cat: 1.3 },
+    { id:'fir', name:'Пихта', sci:'Abies sibirica', cat: 1.1 },
+    { id:'oak', name:'Дуб', sci:'Quercus spp.', cat: 0.85 },
+    { id:'maple', name:'Клён', sci:'Acer semenovii', cat: 0.7 },
+    { id:'walnut', name:'Грецкий орех', sci:'Juglans regia', cat: 0.75 },
+    { id:'apple', name:'Яблоня', sci:'Malus sieversii', cat: 0.5 },
+    { id:'poplar', name:'Тополь', sci:'Populus tremula', cat: 1.0 },
+  ]
+};
+
+// Biomass accumulation (tC/ha) by year for each climate zone
+// Based on IPCC 2006 GL for forestry, table 4.14 adapted
+const growthCurves = {
+  // [10yr, 20yr, 30yr, 40yr, 50yr, 60yr, 80yr, 100yr]
+  arid:     [8,  22,  42,  65,  85, 100, 120, 135],
+  semiarid: [12, 32,  60,  90, 115, 135, 160, 180],
+  steppe:   [18, 48,  88, 130, 165, 195, 235, 265],
+  mountain: [20, 55, 100, 148, 190, 225, 270, 305],
+};
+
+// ========== UI HELPERS ==========
+function buildFieldDiagram() {
+  const d = document.getElementById('fieldDiagram');
+  d.innerHTML = '';
+  for (let r = 0; r < 6; r++) {
+    const row = document.createElement('div');
+    row.className = 'field-row';
+    // tree | crop | tree | crop | tree
+    for (let c = 0; c < 5; c++) {
+      const cell = document.createElement('div');
+      if (c % 2 === 0) {
+        cell.className = 'tree-strip';
+        cell.innerHTML = '🌲';
+      } else {
+        cell.className = 'crop-strip';
+      }
+      row.appendChild(cell);
+    }
+    d.appendChild(row);
+  }
+}
+
+function buildSpecies(zone) {
+  const sel = document.getElementById('speciesSelector');
+  sel.innerHTML = '';
+  const species = speciesData[zone];
+  species.forEach(sp => {
+    const lbl = document.createElement('label');
+    lbl.className = 'species-check';
+    lbl.innerHTML = `
+      <input type="checkbox" value="${sp.id}" onchange="onSpeciesChange()">
+      <div class="checkmark">✓</div>
+      <div>
+        <div class="sp-name">${sp.name}</div>
+        <div class="sp-sci">${sp.sci}</div>
+      </div>
+    `;
+    lbl.querySelector('input').addEventListener('change', function() {
+      lbl.classList.toggle('selected', this.checked);
+    });
+    sel.appendChild(lbl);
+  });
+}
+
+function onSpeciesChange() {
+  const count = document.querySelectorAll('#speciesSelector input:checked').length;
+  document.getElementById('speciesWarning').style.display = count < 5 ? 'block' : 'none';
+}
+
+function onParamChange() {
+  const zone = document.getElementById('climateZone').value;
+  buildSpecies(zone);
+}
+
+function syncRange(param) {
+  const range = document.getElementById(param + 'Range');
+  const num = document.getElementById(param + 'Num');
+  const val = document.getElementById(param + 'Val');
+  num.value = range.value;
+  const min = parseFloat(range.min), max = parseFloat(range.max), v = parseFloat(range.value);
+  const pct = ((v - min) / (max - min) * 100).toFixed(1) + '%';
+  range.style.setProperty('--val', pct);
+  if (param === 'area') val.textContent = range.value + ' га';
+  else if (param === 'density') val.textContent = range.value;
+  else val.textContent = range.value + ' лет';
+}
+
+function syncNum(param) {
+  const range = document.getElementById(param + 'Range');
+  const num = document.getElementById(param + 'Num');
+  const val = document.getElementById(param + 'Val');
+  let v = parseFloat(num.value);
+  v = Math.min(Math.max(v, parseFloat(range.min)), parseFloat(range.max));
+  range.value = v;
+  const min = parseFloat(range.min), max = parseFloat(range.max);
+  const pct = ((v - min) / (max - min) * 100).toFixed(1) + '%';
+  range.style.setProperty('--val', pct);
+  if (param === 'area') val.textContent = v + ' га';
+  else if (param === 'density') val.textContent = v;
+  else val.textContent = v + ' лет';
+}
+
+// ========== CALCULATION ==========
+function interpolateBiomass(zone, years) {
+  const checkpoints = [10, 20, 30, 40, 50, 60, 80, 100];
+  const values = growthCurves[zone];
+  if (years <= 10) return values[0] * (years / 10);
+  if (years >= 100) return values[7];
+  for (let i = 0; i < checkpoints.length - 1; i++) {
+    if (years >= checkpoints[i] && years <= checkpoints[i+1]) {
+      const t = (years - checkpoints[i]) / (checkpoints[i+1] - checkpoints[i]);
+      return values[i] + t * (values[i+1] - values[i]);
+    }
+  }
+  return values[7];
+}
+
+function calculate() {
+  const zone = document.getElementById('climateZone').value;
+  const type = document.getElementById('projectType').value;
+  const area = parseFloat(document.getElementById('areaNum').value);
+  const density = parseFloat(document.getElementById('densityNum').value);
+  const years = parseFloat(document.getElementById('lifeNum').value);
+
+  const checkedSpecies = document.querySelectorAll('#speciesSelector input:checked');
+  if (checkedSpecies.length < 5) {
+    document.getElementById('speciesWarning').style.display = 'block';
+    return;
+  }
+
+  // Base biomass at end of project (tC/ha)
+  let baseCarbon = interpolateBiomass(zone, years);
+
+  // Type modifier
+  const typeMod = { arr: 1.0, agroforest: 0.62, windbreak: 0.55 };
+  baseCarbon *= typeMod[type];
+
+  // Density modifier (baseline 833 trees/ha)
+  const densityMod = Math.min(Math.max(density / 833, 0.4), 1.8);
+  baseCarbon *= densityMod;
+
+  // Species diversity bonus (more species = more resilience = slightly higher C)
+  const speciesBonus = 1 + (checkedSpecies.length - 5) * 0.02;
+  baseCarbon *= speciesBonus;
+
+  // Total carbon in biomass at end of project (tonnes C)
+  const totalC = baseCarbon * area;
+
+  // CO2 equivalent (1 tC = 3.667 tCO2e)
+  const totalCO2e = totalC * 3.667;
+
+  // Annual average
+  const annualCO2e = totalCO2e / years;
+
+  // Total trees
+  const totalTrees = area * density;
+
+  // Timber volume estimate (very rough: 1 tC ≈ 2.8 m³ timber)
+  const timberEst = totalC * 2.8;
+
+  renderResults({
+    zone, type, area, density, years,
+    totalC, totalCO2e, annualCO2e, totalTrees, timberEst, baseCarbon, checkedSpecies: checkedSpecies.length
+  });
+}
+
+function renderResults(r) {
+  const container = document.getElementById('calcResults');
+
+  const typeNames = {
+    arr: 'Лесовосстановление (ARR)',
+    agroforest: 'Агролесоводство',
+    windbreak: 'Ветрозащитные полосы'
+  };
+  const zoneNames = {
+    arid: 'Аридная',
+    semiarid: 'Полуаридная',
+    steppe: 'Степная',
+    mountain: 'Горная / Субальпийская'
+  };
+
+  // Build timeline bar data
+  const checkpoints = [10, 20, 30, 40, 50, 60, 80, 100].filter(y => y <= r.years + 10);
+  const maxC = interpolateBiomass(r.zone, Math.min(r.years + 10, 100)) * r.area * { arr:1.0, agroforest:0.62, windbreak:0.55}[r.type];
+  const barData = checkpoints.map(y => ({
+    year: y,
+    c: Math.min(interpolateBiomass(r.zone, y) * r.area * { arr:1.0, agroforest:0.62, windbreak:0.55}[r.type], r.totalC * 1.05)
+  }));
+
+  const barsHTML = barData.map(b => {
+    const h = Math.max(4, (b.c / (maxC * 1.1)) * 70);
+    const co2 = (b.c * 3.667).toFixed(0);
+    return `<div class="timeline-year" style="height:${h}px;opacity:${b.year<=r.years?1:0.35}" 
+      data-tip="Год ${b.year}: ${b.c.toFixed(0)} tC / ${co2} tCO₂e"></div>`;
+  }).join('');
+  const labelsHTML = barData.map(b => `<span>${b.year}</span>`).join('');
+
+  container.innerHTML = `
+    <div class="results-header">
+      <h3>Результаты расчёта</h3>
+      <p>${typeNames[r.type]} · ${zoneNames[r.zone]} · ${r.area} га · ${r.years} лет · ${r.checkedSpecies} пород</p>
+    </div>
+
+    <div class="result-card" style="border-left-color:var(--leaf)">
+      <div class="result-label">Углерод в надземной биомассе (итог)</div>
+      <div class="result-number">${r.totalC.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}</div>
+      <div class="result-unit">тонн углерода (tC) к ${r.years}-му году</div>
+    </div>
+
+    <div class="result-card highlight">
+      <div class="result-label">Углеродные единицы CO₂-эквивалент</div>
+      <div class="result-number">${r.totalCO2e.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}</div>
+      <div class="result-unit">тонн CO₂e (tCO₂e) за ${r.years} лет</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div class="result-card" style="padding:1.2rem">
+        <div class="result-label">Среднегодовая</div>
+        <div class="result-number" style="font-size:1.8rem">${r.annualCO2e.toFixed(0)}</div>
+        <div class="result-unit">tCO₂e / год</div>
+      </div>
+      <div class="result-card" style="padding:1.2rem">
+        <div class="result-label">Деревьев всего</div>
+        <div class="result-number" style="font-size:1.8rem">${r.totalTrees.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}</div>
+        <div class="result-unit">саженцев</div>
+      </div>
+    </div>
+
+    <div class="timeline-bar">
+      <h4>Накопление C по годам (tC)</h4>
+      <div class="timeline-years">${barsHTML}</div>
+      <div class="timeline-labels">${labelsHTML}</div>
+    </div>
+
+    <div class="methodology">
+      <h4>Методология расчёта</h4>
+      <p>
+        Базовые значения накопления биомассы — IPCC 2006 Good Practice Guidelines 
+        (Table 4.14, умеренный и аридный климат). Конверсия: C → CO₂e × 3.667. 
+        Учитывается только надземная биомасса. Понижающие коэффициенты применены 
+        для агролесоводства (×0.62) и ветрополос (×0.55) ввиду частичного облесения площади. 
+        Минимум 5 пород повышает устойчивость и снижает риск потерь.
+        <br><br>
+        <strong>Точный расчёт</strong> требует полевых измерений, 
+        локального аллометрического уравнения и аудита по стандартам Verra VCS или Gold Standard.
+      </p>
+    </div>
+  `;
+
+  // Animate cards in
+  setTimeout(() => {
+    container.querySelectorAll('.result-card').forEach((c, i) => {
+      setTimeout(() => c.classList.add('visible'), i * 100);
+    });
+  }, 50);
+}
+
+// ========== INIT ==========
+buildFieldDiagram();
+buildSpecies('arid');
+</script>
+</body>
+</html>

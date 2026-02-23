@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Законодательство РК и Углеродные Проекты | Qazaq Carbon Academy</title>
+    <meta name="description"
+        content="Разбор правового регулирования добровольного углеродного рынка (VCM) в Казахстане. Статус офсетов и права собственности фермеров.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .article-header {
+            background-color: var(--brand-black);
+            color: white;
+            padding: 160px 0 80px 0;
+            position: relative;
+            overflow: hidden;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .article-registry-badge {
+            display: inline-block;
+            background: rgba(255, 200, 0, 0.2);
+            color: #ffc800;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 200, 0, 0.3);
+        }
+
+        .article-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+            max-width: 800px;
+            line-height: 1.2;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 4rem;
+            align-items: start;
+            padding-top: 4rem;
+            padding-bottom: 6rem;
+        }
+
+        /* Sidebar TOC */
+        .article-sidebar {
+            position: sticky;
+            top: 100px;
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            border-left: 4px solid var(--brand-yellow);
+        }
+
+        .toc-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--brand-black);
+            font-family: var(--font-heading);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .toc-list a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            display: block;
+        }
+
+        .toc-list a:hover,
+        .toc-list a.active {
+            color: var(--brand-blue);
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-content h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--brand-black);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .article-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .article-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--brand-blue);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box {
+            background: rgba(45, 77, 124, 0.05);
+            border-left: 4px solid var(--brand-blue);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-box h4 {
+            color: var(--brand-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .law-quote {
+            padding: 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: #f8fafc;
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .law-quote::before {
+            content: "«";
+            position: absolute;
+            font-size: 4rem;
+            color: #cbd5e1;
+            top: -10px;
+            left: 10px;
+            font-family: serif;
+        }
+
+        @media (max-width: 900px) {
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .article-sidebar {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Qazaq Carbon" class="nav-logo-img" style="height: 45px;">
+            </a>
+            <div class="nav-links">
+                <a href="index.html#about" class="nav-link">Как это работает?</a>
+                <a href="calculator.html" class="nav-link">Калькулятор</a>
+                <a href="standards.html" class="nav-link">Справочник стандартов</a>
+            </div>
+            <a href="calculator.html" class="btn btn-primary nav-btn">Рассчитать потенциал</a>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <div class="article-registry-badge">Экологический Кодекс РК</div>
+            <h1 class="article-title">Правовое регулирование: Законны ли углеродные проекты?</h1>
+            <p class="article-subtitle">
+                Разбираем последние поправки в законодательство. Кому принадлежит углерод в земле, можно ли его
+                продавать за рубеж, и какие права есть у фермера-арендатора.
+            </p>
+        </div>
+    </header>
+
+    <section class="section bg-light" style="padding-top: 0;">
+        <div class="container article-grid">
+
+            <!-- Sidebar -->
+            <aside class="article-sidebar">
+                <h3 class="toc-title">Содержание</h3>
+                <ul class="toc-list">
+                    <li><a href="#intro" class="active">1. Добровольный рынок в Законе</a></li>
+                    <li><a href="#property">2. Права собственности. Чей углерод?</a></li>
+                    <li><a href="#article6">3. Статья 6 Парижского Соглашения и Экспорт</a></li>
+                    <li><a href="#exchange">4. Биржевая торговля и статус Офсетов</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <article class="article-content">
+                <h2 id="intro">1. Закрепление Добровольного Рынка (VCM) в Законе</h2>
+                <p>Долгое время лесные и сельскохозяйственные проекты находились в "серой зоне" – закон регулировал
+                    только крупные заводы (Систему квотирования KAZ ETS). Однако, <strong>поправки в Экологический и
+                        Земельный кодексы рубежа 2025-2026 годов</strong> в корне изменили ситуацию.</p>
+                <p>Теперь Добровольный Углеродный Рынок (VCM) легализован.</p>
+                <ul>
+                    <li><strong>(Статья 298 ЭкоКодекса):</strong> Законодательно закреплены понятия "Лесные и пастбищные
+                        углеродные офсеты".</li>
+                    <li>Теперь официально разрешено реализовывать углеродные проекты не только государству, но и
+                        частному бизнесу на <strong>землях сельскохозяйственного назначения</strong>, землях лесного
+                        фонда и пастбищах.</li>
+                </ul>
+
+                <h2 id="property">2. Фундаментальный вопрос: "Кому принадлежит углерод?"</h2>
+                <p>Исторически главной преградой для фермеров был вопрос собственности. Если фермер арендует землю у
+                    государства на 49 лет, кому принадлежат деньги от углерода в этой почве или от деревьев, посаженных
+                    на этой земле?</p>
+
+                <div class="law-quote">
+                    Согласно новым поправкам в Экологический кодекс 2025 года, углеродные единицы определены как
+                    "торгуемый товар". Самое важное: право генерировать и монетизировать углеродные офсеты вытекает
+                    <strong>из права землепользования (аренды)</strong>, а не из права первичной собственности
+                    государства на землю.
+                </div>
+
+                <div class="info-box">
+                    <h4>💡 Что это значит для фермера?</h4>
+                    <p>Если у вас есть долгосрочная аренда на землю, и вы посадили там деревья или внедрили
+                        ресурсосберегающие технологии (No-Till), <strong>углеродные кредиты, полученные от этих
+                            действий, принадлежат ВАМ</strong>, а не государству. Вы вправе продавать их международным
+                        компаниям.</p>
+                </div>
+
+                <h2 id="article6">3. Экспорт кредитов. Статья 6 Парижского Соглашения</h2>
+                <p>Фермеры сажают деревья в Казахстане, а покупают эти кредиты корпорации в Европе или Японии. Как
+                    законно перевести их за рубеж? Для этого Казахстан ратифицировал <strong>Статью 6 Парижского
+                        соглашения</strong>.</p>
+
+                <h3>Новые правила экспорта:</h3>
+                <ul>
+                    <li><strong>Letters of Authorization (Письма Авторизации):</strong> Министерство Экологии РК теперь
+                        официально выдает разрешения на передачу "углеродных результатов" (ITMO) иностранным покупателям
+                        без риска двойного учета.</li>
+                    <li>Казахстан уже подписал соглашения о таком обмене (механизм JCM) с <strong>Японией и Южной
+                            Кореей</strong>.</li>
+                    <li><strong>Налог на экологию (10%):</strong> Согласно новым правилам, чтобы государство достигло
+                        своих собственных климатических целей, <strong>как минимум 10%</strong> от объема ваших
+                        сгенерированных кредитов должны быть безвозмездно переданы в национальный реестр Казахстана.
+                        Остальные 90% — ваша коммерческая прибыль.</li>
+                </ul>
+
+                <h2 id="exchange">4. Как и где продаются офсеты?</h2>
+                <p>Углеродный кредит (единица) — это не просто виртуальная картинка. В рамках законодательства РК,
+                    особенно в юрисдикции <strong>Международного финансового центра "Астана" (МФЦА - AIFC)</strong>,
+                    углеродные единицы признаны <strong>"финансовыми инструментами"</strong>.</p>
+
+                <p><strong>Биржевая торговля (Статья 299):</strong> Закон прямо разрешает куплю-продажу углеродных
+                    единиц на товарных и фондовых биржах. Это означает, что:</p>
+                <ul>
+                    <li>Сделки защищены английским правом в рамках МФЦА.</li>
+                    <li>Покупателями могут выступать крупнейшие международные инвестиционные фонды, а также
+                        международные авиакомпании (через механизмы CORSIA).</li>
+                </ul>
+                <p><em>Наша компания Qazaq Carbon берет на себя всю сложную юридическую обвязку и сопровождение сделок
+                        на международных биржах от имени фермеров.</em></p>
+
+            </article>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <span class="logo-stack">
+                    <span class="logo-top" style="color:#ffffff;">QAZAQ</span>
+                    <span class="logo-bottom" style="color:#ffffff;">CARBON</span>
+                </span>
+                <p class="footer-desc">Развитие прозрачного добровольного углеродного рынка в Центральной Азии.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Разделы</h4>
+                <a href="index.html#about">Почему мы?</a>
+                <a href="calculator.html">Калькулятор</a>
+                <a href="standards.html">Справочник стандартов</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Свяжитесь с нами</h4>
+                <p>info@qazaqcarbon.com</p>
+                <p>www.qazaqcarbon.com</p>
+                <a href="#" class="btn btn-primary btn-small mt-2">Заказать аудит</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Qazaq Carbon (бренд ТОО SF Analytics). Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

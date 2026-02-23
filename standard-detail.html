@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Разбор стандарта: Verra VM0047 | Qazaq Carbon Academy</title>
+    <meta name="description"
+        content="Разбор методологии Verra VM0047 (ARR) простым языком для фермеров и партнеров Qazaq Carbon.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .article-header {
+            background-color: var(--brand-black);
+            color: white;
+            padding: 160px 0 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-registry-badge {
+            display: inline-block;
+            background: rgba(46, 139, 87, 0.2);
+            color: #4CAF50;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .article-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+            max-width: 800px;
+            line-height: 1.2;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 4rem;
+            align-items: start;
+            padding-top: 4rem;
+            padding-bottom: 6rem;
+        }
+
+        /* Sidebar TOC */
+        .article-sidebar {
+            position: sticky;
+            top: 100px;
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            border-left: 4px solid var(--brand-yellow);
+        }
+
+        .toc-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--brand-black);
+            font-family: var(--font-heading);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .toc-list a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            display: block;
+        }
+
+        .toc-list a:hover,
+        .toc-list a.active {
+            color: var(--brand-blue);
+            font-weight: 600;
+        }
+
+        .sidebar-action {
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main Content */
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-content h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--brand-black);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .article-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .article-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--brand-blue);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box {
+            background: rgba(45, 77, 124, 0.05);
+            border-left: 4px solid var(--brand-blue);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-box h4 {
+            color: var(--brand-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .article-image {
+            width: 100%;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 900px) {
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .article-sidebar {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Qazaq Carbon" class="nav-logo-img" style="height: 45px;">
+            </a>
+            <div class="nav-links">
+                <a href="index.html#about" class="nav-link">Как это работает?</a>
+                <a href="calculator.html" class="nav-link">Калькулятор</a>
+                <a href="standards.html" class="nav-link"
+                    style="color: var(--brand-blue); border-bottom: 2px solid var(--brand-blue);">Справочник
+                    стандартов</a>
+            </div>
+            <a href="calculator.html" class="btn btn-primary nav-btn">Рассчитать потенциал</a>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <div class="article-registry-badge">Verra VM0047</div>
+            <h1 class="article-title">Облесение, Лесовосстановление и Восстановление растительности</h1>
+            <p class="article-subtitle">
+                Самая современная методология для агролесных проектов. Как международный статус применяется к нашему
+                региону, и почему деревья стали ценным активом.
+            </p>
+        </div>
+    </header>
+
+    <section class="section bg-light" style="padding-top: 0;">
+        <div class="container article-grid">
+
+            <!-- Sidebar -->
+            <aside class="article-sidebar">
+                <h3 class="toc-title">Содержание</h3>
+                <ul class="toc-list">
+                    <li><a href="#intro" class="active">1. Что это за стандарт?</a></li>
+                    <li><a href="#baseline">2. Базовая линия</a></li>
+                    <li><a href="#additionality">3. Дополнительность</a></li>
+                    <li><a href="#mrv">4. Мониторинг (MRV)</a></li>
+                    <li><a href="#risks">5. Риски и Буферный пул</a></li>
+                </ul>
+                <div class="sidebar-action">
+                    <a href="#" class="btn btn-primary"
+                        style="width: 100%; text-align: center; padding: 0.8rem; font-size: 0.9rem;">
+                        📄 Скачать PDF оригинал
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <article class="article-content">
+                <h2 id="intro">1. Что это за стандарт? (Простым языком)</h2>
+                <p>Методология <strong>Verra VM0047</strong> создана для проектов, которые сажают новые деревья
+                    (Afforestation, Reforestation) или восстанавливают нарушенную растительность (Revegetation, ARR).
+                    Наш углеродный калькулятор основан на принципах именно этого стандарта.</p>
+                <p>В отличие от более старых стандартов, VM0047 очень гибкий. Он идеально подходит для
+                    <strong>агролесоводства</strong> (когда деревья растут рядом с сельскохозяйственными культурами) и
+                    создания <strong>ветрозащитных полос</strong>, что является нашим приоритетом в Казахстане.</p>
+
+                <div class="info-box">
+                    <h4>💡 Главная суть:</h4>
+                    <p>Аудиторы платят вам не просто за факт посадки дерева. Они платят за объем <strong>углерода
+                            (CO₂)</strong>, который это дерево высосало из атмосферы и заперло внутри своего ствола,
+                        веток и корней за время своего роста.</p>
+                </div>
+
+                <h2 id="baseline">2. Понятие "Базовой линии"</h2>
+                <p>Чтобы понять, сколько кредитов вам выдать, аудитор (VVB) должен знать: <em>А что было бы, если бы вы
+                        ничего не делали?</em></p>
+                <p>Если бы земля оставалась пустырем, уровень углерода был бы равен нулю (или падал из-за деградации).
+                    Эта "нулевая точка" называется <strong>базовой линией</strong>. Все деревья, которые вы посадили
+                    поверх базовой линии — генерируют кредиты.</p>
+
+                <h3>Требование к земле:</h3>
+                <ul>
+                    <li>Участок <strong>не должен был быть лесом</strong> в течение минимум 10 лет до старта проекта.
+                    </li>
+                    <li>Вы должны подтвердить это с помощью исторических спутниковых снимков или документов на землю.
+                    </li>
+                </ul>
+
+                <h2 id="additionality">3. Доказательство дополнительности</h2>
+                <p>Это самый строгий тест. Verra спросит: <em>А может, вам по закону положено сажать здесь деревья? Или
+                        это и так супер-выгодно финансово без наших сертификатов?</em></p>
+                <p>Мы (Qazaq Carbon) берем на себя работу с обоснованием. Мы доказываем инвесторам, что без денег от
+                    продажи углеродных кредитов этот проект фермеру поднять было бы экономически невыгодно (или слишком
+                    рискованно из-за кредитов). Это доказывает <strong>Дополнительность</strong>.</p>
+
+                <h2 id="mrv">4. Как работает Мониторинг (MRV)?</h2>
+                <p>Углерод не измеряют "на глаз". Аудиторы требуют строгий мониторинг (MRV - Measurement, Reporting,
+                    Verification) как минимум каждые 5 лет:</p>
+                <ul>
+                    <li><strong>Наземные замеры:</strong> Инженеры измеряют обхват ствола (DBH) и высоту выборки
+                        деревьев на участке.</li>
+                    <li><strong>Калибровка моделей:</strong> Данные заносятся в формулы IPCC (которые вшиты в наш
+                        Калькулятор), чтобы рассчитать биомассу.</li>
+                    <li><strong>Дистанционный мониторинг (dMRV):</strong> Мы будем использовать спутники для постоянного
+                        отслеживания выживаемости леса и отсутствия незаконных вырубок.</li>
+                </ul>
+
+                <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&q=80&w=1000"
+                    alt="Лесной мониторинг" class="article-image">
+
+                <h2 id="risks">5. Риски, Утечки и Буферный пул</h2>
+                <p>Лес — это живое. Он может сгореть от молнии или пострадать от вредителей. Стандарт Verra учитывает
+                    этот риск.</p>
+
+                <h3>Буферный пул (Страховка)</h3>
+                <p>Часть ваших заработанных углеродных кредитов (от 10% до 20%) <strong>не выдается вам на
+                        руки</strong>. Они уходят в глобальный "общак" (буферный пул). Если в Канаде или у вас сгорает
+                    посаженный проект, инвесторы получают компенсацию из этого пула. Таким образом достигается
+                    "Постоянство" сделки.</p>
+
+                <h3>Утечки (Leakage)</h3>
+                <p>Если мы посадили лес на пастбище, а фермер из-за этого пошел и вырубил настоящий природный лес по
+                    соседству, чтобы пасти коров там — это называется негативной Утечкой. Стандарт заставит нас вычесть
+                    этот ущерб из заработанных кредитов фермера. Поэтому проект должен планироваться комплексно, не
+                    вредя другим землям.</p>
+
+            </article>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <span class="logo-stack">
+                    <span class="logo-top" style="color:#ffffff;">QAZAQ</span>
+                    <span class="logo-bottom" style="color:#ffffff;">CARBON</span>
+                </span>
+                <p class="footer-desc">Развитие прозрачного добровольного углеродного рынка в Центральной Азии.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Разделы</h4>
+                <a href="index.html#about">Почему мы?</a>
+                <a href="calculator.html">Калькулятор</a>
+                <a href="standards.html">Справочник стандартов</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Свяжитесь с нами</h4>
+                <p>info@qazaqcarbon.com</p>
+                <p>www.qazaqcarbon.com</p>
+                <a href="#" class="btn btn-primary btn-small mt-2">Заказать аудит</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Qazaq Carbon (бренд ТОО SF Analytics). Все права защищены. Интерактивная платформа "Qazaq
+                Carbon Academy".</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

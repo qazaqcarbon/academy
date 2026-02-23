@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Разбор стандарта: Verra VM0042 | Qazaq Carbon Academy</title>
+    <meta name="description"
+        content="Разбор методологии Verra VM0042 (Почвенный углерод - SOC) простым языком для фермеров и партнеров Qazaq Carbon.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .article-header {
+            background-color: var(--brand-black);
+            color: white;
+            padding: 160px 0 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-registry-badge {
+            display: inline-block;
+            background: rgba(46, 139, 87, 0.2);
+            color: #4CAF50;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .article-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+            max-width: 800px;
+            line-height: 1.2;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 4rem;
+            align-items: start;
+            padding-top: 4rem;
+            padding-bottom: 6rem;
+        }
+
+        /* Sidebar TOC */
+        .article-sidebar {
+            position: sticky;
+            top: 100px;
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            border-left: 4px solid var(--brand-yellow);
+        }
+
+        .toc-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--brand-black);
+            font-family: var(--font-heading);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .toc-list a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            display: block;
+        }
+
+        .toc-list a:hover,
+        .toc-list a.active {
+            color: var(--brand-blue);
+            font-weight: 600;
+        }
+
+        .sidebar-action {
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main Content */
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-content h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--brand-black);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .article-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .article-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--brand-blue);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box {
+            background: rgba(45, 77, 124, 0.05);
+            border-left: 4px solid var(--brand-blue);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-box h4 {
+            color: var(--brand-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .article-image {
+            width: 100%;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 900px) {
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .article-sidebar {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Qazaq Carbon" class="nav-logo-img" style="height: 45px;">
+            </a>
+            <div class="nav-links">
+                <a href="index.html#about" class="nav-link">Как это работает?</a>
+                <a href="calculator.html" class="nav-link">Калькулятор</a>
+                <a href="standards.html" class="nav-link"
+                    style="color: var(--brand-blue); border-bottom: 2px solid var(--brand-blue);">Справочник
+                    стандартов</a>
+            </div>
+            <a href="calculator.html" class="btn btn-primary nav-btn">Рассчитать потенциал</a>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <div class="article-registry-badge">Verra VM0042</div>
+            <h1 class="article-title">Улучшение управления сельскохозяйственными землями</h1>
+            <p class="article-subtitle">
+                Методология увеличения почвенного органического углерода (SOC) через устойчивые практики: нулевая
+                обработка, покровные культуры и улучшенный выпас.
+            </p>
+        </div>
+    </header>
+
+    <section class="section bg-light" style="padding-top: 0;">
+        <div class="container article-grid">
+
+            <!-- Sidebar -->
+            <aside class="article-sidebar">
+                <h3 class="toc-title">Содержание</h3>
+                <ul class="toc-list">
+                    <li><a href="#intro" class="active">1. О методологии (ALM)</a></li>
+                    <li><a href="#practices">2. Подходящие практики</a></li>
+                    <li><a href="#baseline">3. Базовая линия</a></li>
+                    <li><a href="#monitoring">4. Анализ и Моделирование</a></li>
+                    <li><a href="#reversals">5. Риски возврата (Reversals)</a></li>
+                </ul>
+                <div class="sidebar-action">
+                    <a href="#" class="btn btn-primary"
+                        style="width: 100%; text-align: center; padding: 0.8rem; font-size: 0.9rem;">
+                        📄 Скачать PDF оригинал
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <article class="article-content">
+                <h2 id="intro">1. Обзор методологии VM0042 (ALM)</h2>
+                <p><strong>Verra VM0042</strong> (Agricultural Land Management) — это революционный стандарт для
+                    фермеров-растениеводов и животноводов. Он позволяет монетизировать не посадку деревьев, а саму
+                    <strong>землю и почву</strong>.</p>
+                <p>Углерод хранится не только в стволах деревьев, но и в гумусе почвы. Традиционная вспашка выбрасывает
+                    этот углерод (в виде CO₂) в атмосферу. Улучшая здоровье почвы, вы запираете углерод обратно под
+                    землю.</p>
+
+                <div class="info-box">
+                    <h4>💡 Главная суть:</h4>
+                    <p>Вам заплатят за то, что вы меняете подход к земледелию. Внедряя сберегающие технологии (No-Till и
+                        др.), вы накапливаете Почвенный Органический Углерод (SOC), который конвертируется в углеродные
+                        кредиты на продажу.</p>
+                </div>
+
+                <h2 id="practices">2. Какие практики подходят фермерам?</h2>
+                <p>Методология одобряет проекты, если фермер внедряет одну или несколько из следующих практик (которые
+                    ранее на этом поле не применялись):</p>
+                <ul>
+                    <li><strong>Mini-Till или No-Till:</strong> Снижение или полное прекращение механической обработки
+                        почвы (перепахивания), чтобы не разрушать структуру почвы и не выпускать CO₂.</li>
+                    <li><strong>Покровные культуры (Cover Crops):</strong> Посадка растений между основными сезонами
+                        урожая, чтобы земля не стояла голой. Они защищают от эрозии и добавляют биомассу.</li>
+                    <li><strong>Улучшенный севооборот:</strong> Добавление более глубоко укореняющихся культур или
+                        бобовых для восстановления азота.</li>
+                    <li><strong>Улучшенное управление пастбищами:</strong> Ротационный выпас скота (чтобы трава успевала
+                        восстановиться) и предотвращение перевыпаса.</li>
+                </ul>
+
+                <h2 id="baseline">3. Установление Базовой Линии</h2>
+                <p>Аудиторы VVB спросят: <em>Если бы не углеродные кредиты, продолжили бы вы вспахивать землю как
+                        раньше? Теряла бы земля углерод?</em></p>
+                <p>Базовая линия строится на трехлетней истории поля до старта проекта. Мы собираем документы о том,
+                    какие культуры вы сажали последние 3 года, какие удобрения применяли, এবং как обрабатывали землю.
+                    Разница между этим "сценарием как обычно" и вашими новыми эко-практиками (No-Till) — это ваши
+                    кредиты.</p>
+
+                <h2 id="monitoring">4. Как измеряется углерод в почве?</h2>
+                <p>В отличие от деревьев (которые можно измерить рулеткой), почвенный углерод (SOC) находится под землей
+                    и меняется медленнее. VM0042 предлагает два подхода к мониторингу:</p>
+                <ul>
+                    <li><strong>Подход "Измеряй" (Measure):</strong> Глубокий отбор проб почвы (на глубину 30-100 см) в
+                        лабораторию до старта проекта и затем каждые 3-5 лет для точного физического доказательства
+                        накопления углерода. Это дорого, но очень точно.</li>
+                    <li><strong>Подход "Моделируй" (Model):</strong> Использование утвержденных компьютерных
+                        биогеохимических моделей (например, RothC, DNDC). В модель загружаются данные по погоде, типу
+                        почвы и вашим урожаям. Модель симулирует объем накопленного углерода. Это дешевле, но требует
+                        строгого контроля за тем, что фермер реально соблюдает практики на полях.</li>
+                </ul>
+                <p><em>Наша команда Qazaq Carbon берет сложность этого процесса (включая работу с лабораториями и
+                        моделями) на себя.</em></p>
+
+                <img src="https://images.unsplash.com/photo-1592982537447-6f233496bc4e?auto=format&fit=crop&q=80&w=1000"
+                    alt="Поле и почва" class="article-image">
+
+                <h2 id="reversals">5. Риски Возврата (Reversals)</h2>
+                <p>Накопить углерод в почве — это полдела. <strong>Постоянство</strong> — это главное требование.</p>
+                <p>Если фермер соблюдал No-Till 5 лет, получил углеродные кредиты, а на 6-й год решил глубоко вспахать
+                    поле трактором... Весь накопленный за 5 лет углерод улетит в атмосферу. Это называется <em>Возврат
+                        (Reversal)</em>.</p>
+                <p>Чтобы избежать штрафов, стандарты строго требуют долгосрочных обязательств от фермера (от 20 лет) и
+                    удерживают часть кредитов в буферном пуле страховки.</p>
+
+            </article>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <span class="logo-stack">
+                    <span class="logo-top" style="color:#ffffff;">QAZAQ</span>
+                    <span class="logo-bottom" style="color:#ffffff;">CARBON</span>
+                </span>
+                <p class="footer-desc">Развитие прозрачного добровольного углеродного рынка в Центральной Азии.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Разделы</h4>
+                <a href="index.html#about">Почему мы?</a>
+                <a href="calculator.html">Калькулятор</a>
+                <a href="standards.html">Справочник стандартов</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Свяжитесь с нами</h4>
+                <p>info@qazaqcarbon.com</p>
+                <p>www.qazaqcarbon.com</p>
+                <a href="#" class="btn btn-primary btn-small mt-2">Заказать аудит</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Qazaq Carbon (бренд ТОО SF Analytics). Все права защищены. Интерактивная платформа "Qazaq
+                Carbon Academy".</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

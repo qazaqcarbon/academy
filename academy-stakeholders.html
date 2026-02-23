@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главные Стейкхолдеры и Регуляторы Рынка | Qazaq Carbon Academy</title>
+    <meta name="description"
+        content="Кто управляет углеродным рынком? Роль Министерства Экологии, АО 'Жасыл Даму' и других структур.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .article-header {
+            background-color: var(--brand-black);
+            color: white;
+            padding: 160px 0 80px 0;
+            position: relative;
+            overflow: hidden;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)), url('https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .article-registry-badge {
+            display: inline-block;
+            background: rgba(255, 200, 0, 0.2);
+            color: #ffc800;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 200, 0, 0.3);
+        }
+
+        .article-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+            max-width: 800px;
+            line-height: 1.2;
+        }
+
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 4rem;
+            align-items: start;
+            padding-top: 4rem;
+            padding-bottom: 6rem;
+        }
+
+        /* Sidebar TOC */
+        .article-sidebar {
+            position: sticky;
+            top: 100px;
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            border-left: 4px solid var(--brand-yellow);
+        }
+
+        .toc-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--brand-black);
+            font-family: var(--font-heading);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .toc-list a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            display: block;
+        }
+
+        .toc-list a:hover,
+        .toc-list a.active {
+            color: var(--brand-blue);
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-content h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--brand-black);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .article-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .article-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--brand-blue);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .org-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--brand-blue);
+            margin-bottom: 2rem;
+        }
+
+        .org-card-icon {
+            font-size: 3rem;
+        }
+
+        .org-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            color: var(--brand-black);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .org-card p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 900px) {
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .article-sidebar {
+                position: relative;
+                top: 0;
+            }
+
+            .org-card {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Qazaq Carbon" class="nav-logo-img" style="height: 45px;">
+            </a>
+            <div class="nav-links">
+                <a href="index.html#about" class="nav-link">Как это работает?</a>
+                <a href="calculator.html" class="nav-link">Калькулятор</a>
+                <a href="standards.html" class="nav-link">Справочник стандартов</a>
+            </div>
+            <a href="calculator.html" class="btn btn-primary nav-btn">Рассчитать потенциал</a>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <div class="article-registry-badge">Институциональная архитектура</div>
+            <h1 class="article-title">Кто регулирует углеродный рынок в РК?</h1>
+            <p class="article-subtitle">
+                Государство не стоит в стороне. Разбираемся, к каким ведомствам относится углерод, кто ведет реестры, и
+                какую роль играет Альянс Qazaq VCM.
+            </p>
+        </div>
+    </header>
+
+    <section class="section bg-light" style="padding-top: 0;">
+        <div class="container article-grid">
+
+            <!-- Sidebar -->
+            <aside class="article-sidebar">
+                <h3 class="toc-title">Содержание</h3>
+                <ul class="toc-list">
+                    <li><a href="#intro" class="active">1. Архитектура рынка</a></li>
+                    <li><a href="#zhasyl">2. Роль АО "Жасыл Даму"</a></li>
+                    <li><a href="#ministries">3. Профильные Министерства</a></li>
+                    <li><a href="#alliance">4. Qazaq VCM Alliance</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <article class="article-content">
+                <h2 id="intro">1. Государственная Архитектура Рынка</h2>
+                <p>Углеродный рынок Казахстана, который согласно прогнозам потребует <strong>инвестиций в $610
+                        миллиардов</strong> до 2060 года, не может существовать без строгой государственной структуры.
+                </p>
+                <p>Для фермера важно понимать: Добровольный рынок (VCM) не означает "безнадзорный". Международные
+                    стандарты (Verra, Gold Standard) тесно интегрируются в государственные электронные реестры, чтобы не
+                    допустить мошенничества и "двойного учета" одного и того же дерева.</p>
+
+                <h2 id="zhasyl">2. Технический оператор: АО "Жасыл Даму"</h2>
+                <p>Главным техническим узлом на рынке выступает <strong>АО "Жасыл Даму"</strong> (подведомственная
+                    организация Министерства Экологии). В 2025 году их полномочия были радикально расширены.</p>
+
+                <div class="org-card">
+                    <div class="org-card-icon">💻</div>
+                    <div>
+                        <h4 class="org-card-title">Функции "Жасыл Даму" для фермеров:</h4>
+                        <p>
+                            <strong>1. Государственный Реестр:</strong> Эта организация ведет главную базу данных
+                            (реестр). Когда Qazaq Carbon генерирует кредиты для фермера, Жасыл Даму следит, чтобы эти
+                            единицы были правильно записаны.<br><br>
+                            <strong>2. Интеграция с миром (CAD Trust):</strong> При поддержке Всемирного Банка ($4.8 млн
+                            грант), реестр Жасыл Даму подключается к блокчейн-платформе Climate Action Data Trust. Это
+                            обеспечивает "глобальную видимость" казахстанских кредитов для зарубежных
+                            покупателей.<br><br>
+                            <strong>3. Хранение страховки:</strong> Именно "Жасыл Даму" ведет "буферные счета", на
+                            которых замораживаются запасные кредиты (страховка на случай лесных пожаров).
+                        </p>
+                    </div>
+                </div>
+
+                <h2 id="ministries">3. Профильные Министерства</h2>
+
+                <div class="org-card">
+                    <div class="org-card-icon">🏛️</div>
+                    <div>
+                        <h4 class="org-card-title">МинЭкологии (МЭПР РК)</h4>
+                        <p>Главный "хозяин" темы. Министерство утверждает методики, координирует рынок и <strong>выдает
+                                Письма Авторизации (LoA)</strong>, разрешающие экспорт углеродных единиц в другие страны
+                            по Статье 6 ООН.</p>
+                    </div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-icon">🌲</div>
+                    <div>
+                        <h4 class="org-card-title">Комитет лесного хозяйства и животного мира</h4>
+                        <p>Ключевой партнер для крупных проектов по посадке леса (NbS). Поскольку большинство крупных
+                            посадок планируется на землях государственного лесного фонда, сотрудничество с Комитетом
+                            обязательно для заключения долгосрочной аренды земли.</p>
+                    </div>
+                </div>
+
+                <div class="org-card">
+                    <div class="org-card-icon">🚜</div>
+                    <div>
+                        <h4 class="org-card-title">Министерство Сельского Хозяйства (МСХ)</h4>
+                        <p>Министерство курирует земледелие. Именно оно (через Институт почвоведения) ответственно за
+                            сбор исторических данных о плодородии почв. Их поддержка важна при внедрении проектов по
+                            накоплению почвенного углерода (SOC).</p>
+                    </div>
+                </div>
+
+                <h2 id="alliance">4. Частный Сектор: Механизм координации</h2>
+                <p>Чтобы защищать права бизнеса и фермеров перед государством, и чтобы внедрять международные
+                    практики в Центральной Азии без бюрократии, был создан <strong>Альянс Qazaq VCM (Qazaq VCM
+                        Alliance)</strong>.</p>
+
+                <p>Наша компания <strong>Qazaq Carbon</strong> выступает одним из главных инициаторов этого альянса.
+                    Альянс объединяет девелоперов, международных сертифицирующих аудиторов и фермерские кооперативы,
+                    чтобы:</p>
+                <ul>
+                    <li>Адаптировать международные методики ООН (Verra, GS, Plan Vivo, OFP и др.) к суровым
+                        климатическим реалиям
+                        Казахстана.</li>
+                    <li>Снижать цены на услуги иностранных аудиторов (VVB) за счет пакетного одобрения
+                        (агрегирования) малых фермерских хозяйств.</li>
+                    <li>Лоббировать интересы фермеров, следя за тем, чтобы как минимум <strong>60% прибыли</strong>
+                        от продажи углеродных единиц доходило напрямую до местных жителей.</li>
+                </ul>
+
+            </article>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <span class="logo-stack">
+                    <span class="logo-top" style="color:#ffffff;">QAZAQ</span>
+                    <span class="logo-bottom" style="color:#ffffff;">CARBON</span>
+                </span>
+                <p class="footer-desc">Развитие прозрачного добровольного углеродного рынка в Центральной Азии.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Разделы</h4>
+                <a href="index.html#about">Почему мы?</a>
+                <a href="calculator.html">Калькулятор</a>
+                <a href="standards.html">Справочник стандартов</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Свяжитесь с нами</h4>
+                <p>info@qazaqcarbon.com</p>
+                <p>www.qazaqcarbon.com</p>
+                <a href="#" class="btn btn-primary btn-small mt-2">Заказать аудит</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Qazaq Carbon (бренд ТОО SF Analytics). Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

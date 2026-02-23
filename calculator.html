@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Углеродный Калькулятор | Qazaq Carbon Academy</title>
+    <meta name="description" content="Интерактивный калькулятор углеродного потенциала для агролесных проектов.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="calc.css">
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Qazaq Carbon" class="nav-logo-img" style="height: 45px;">
+            </a>
+            <div class="nav-links">
+                <a href="index.html#about" class="nav-link">Как это работает?</a>
+                <a href="index.html#academy" class="nav-link">Академия (Основы VCM)</a>
+                <a href="standards.html" class="nav-link">Справочник стандартов</a>
+            </div>
+            <a href="calculator.html" class="btn btn-secondary nav-btn" style="border-width: 2px;">Калькулятор
+                потенциала</a>
+        </div>
+    </nav>
+
+    <header class="hero" style="min-height: 50vh; padding-top: 150px; padding-bottom: 80px;">
+        <div class="hero-bg-accent"></div>
+        <div class="container hero-content" style="max-width: 900px; text-align: center; margin: 0 auto;">
+            <div class="hero-badge" style="margin: 0 auto 1.5rem auto;">Калькулятор посадок ARR</div>
+            <h1 class="hero-title" style="font-size: 3.5rem;">
+                Рассчитайте <span class="text-highlight">углеродный потенциал</span>
+            </h1>
+            <p class="hero-subtitle" style="margin: 0 auto;">
+                Оцените приблизительное количество углеродных единиц (tCO₂e) для вашего агролесного проекта.
+                Моделирование осуществляется по методологии IPCC (2006).
+            </p>
+        </div>
+    </header>
+
+    <section class="section bg-light" style="padding-top: 80px;">
+        <div class="container">
+            <div class="calc-wrapper">
+                <!-- FORM -->
+                <div class="calc-form reveal-element"
+                    style="opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out;">
+                    <h3>Параметры участка</h3>
+
+                    <div class="form-group">
+                        <label>Тип проекта</label>
+                        <select id="projectType" onchange="onParamChange()">
+                            <option value="arr">Лесовосстановление / Облесение (ARR)</option>
+                            <option value="agroforest">Агролесоводство (деревья + культуры)</option>
+                            <option value="windbreak">Ветрозащитные лесополосы</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Климатическая зона / Регион</label>
+                        <select id="climateZone" onchange="onParamChange()">
+                            <option value="arid">Аридная (Кызылорда, Арал, Туркестан)</option>
+                            <option value="semiarid">Полуаридная (Актобе, Костанай, Павлодар)</option>
+                            <option value="steppe">Степная (Акмола, Карагандинская, СКО)</option>
+                            <option value="mountain">Горная / Субальпийская (Алматинская, ВКО)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Площадь посадок (гектаров)</label>
+                        <div class="range-wrap">
+                            <input type="range" id="areaRange" min="1" max="500" value="42" oninput="syncRange('area')"
+                                style="--val:8.2%">
+                            <span class="range-val" id="areaVal">42 га</span>
+                        </div>
+                        <input type="number" id="areaNum" value="42" min="1" max="500" oninput="syncNum('area')"
+                            style="display: none;">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Плотность посадки (деревьев / га)</label>
+                        <div class="range-wrap">
+                            <input type="range" id="densityRange" min="100" max="2500" value="833"
+                                oninput="syncRange('density')" style="--val:30.1%">
+                            <span class="range-val" id="densityVal">833</span>
+                        </div>
+                        <input type="number" id="densityNum" value="833" min="100" max="2500"
+                            oninput="syncNum('density')" style="display: none;">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Срок проекта (лет)</label>
+                        <div class="range-wrap">
+                            <input type="range" id="lifeRange" min="40" max="100" value="40" oninput="syncRange('life')"
+                                style="--val:0%">
+                            <span class="range-val" id="lifeVal">40 лет</span>
+                        </div>
+                        <input type="number" id="lifeNum" value="40" min="40" max="100" oninput="syncNum('life')"
+                            style="display: none;">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Породы деревьев (выберите минимум 5)</label>
+                        <div class="species-selector" id="speciesSelector">
+                            <!-- dynamically filled by JS -->
+                        </div>
+                        <div class="species-warning" id="speciesWarning">
+                            ⚠ Пожалуйста, выберите минимум 5 пород. (Это повышает устойчивость леса и увеличивает
+                            секвестрацию).
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary"
+                        style="width: 100%; font-size: 1.1rem; margin-top: 1rem; padding: 1.2rem;" id="calcBtn"
+                        onclick="calculate()">
+                        Рассчитать онлайн
+                    </button>
+                    <div class="note">
+                        Моделирование основано на коэффициентах роста биомассы IPCC (2006). Данные носят ориентировочный
+                        характер для принятия решений. Точный расчет возможен только после разработки PDD.
+                    </div>
+                </div>
+
+                <!-- RESULTS -->
+                <div class="calc-results reveal-element"
+                    style="opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out 0.2s;"
+                    id="calcResults">
+                    <div class="placeholder-state" id="placeholderState">
+                        <div class="icon">📊</div>
+                        <p>Укажите параметры вашего участка слева<br>и нажмите «Рассчитать онлайн»</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <span class="logo-stack">
+                    <span class="logo-top" style="color:#ffffff;">QAZAQ</span>
+                    <span class="logo-bottom" style="color:#ffffff;">CARBON</span>
+                </span>
+                <p class="footer-desc">Развитие прозрачного добровольного углеродного рынка в Центральной Азии.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Разделы</h4>
+                <a href="index.html#about">Почему мы?</a>
+                <a href="index.html#roadmap">Путь проекта</a>
+                <a href="index.html#academy">Академия VCM</a>
+                <a href="standards.html">Стандарты (Verra, GS)</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Свяжитесь с нами</h4>
+                <p>info@qazaqcarbon.com</p>
+                <p>www.qazaqcarbon.com</p>
+                <a href="#" class="btn btn-primary btn-small mt-2">Заказать аудит</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Qazaq Carbon (бренд ТОО SF Analytics). Все права защищены. Интерактивная платформа "Qazaq
+                Carbon Academy".</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="calc.js"></script>
+    <script>
+        // Trigger reveal animation
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.reveal-element').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+            }, 100);
+        });
+    </script>
+</body>
+
+</html>
