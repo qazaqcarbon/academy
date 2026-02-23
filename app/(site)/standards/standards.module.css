@@ -1,0 +1,157 @@
+.standardsHeader {
+    background-color: var(--brand-blue);
+    color: white;
+    padding: 160px 0 80px 0;
+    text-align: center;
+}
+
+.standardsTitle {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.filterTabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filterTab {
+    padding: 0.8rem 1.5rem;
+    background: white;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filterTab:hover {
+    border-color: var(--brand-blue);
+    color: var(--brand-blue);
+}
+
+.filterTabActive {
+    background: var(--brand-blue);
+    border-color: var(--brand-blue);
+    color: white;
+}
+
+.standardsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.standardCard {
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-top: 4px solid var(--brand-light);
+}
+
+.standardCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.registryVerra {
+    border-top-color: #2e8b57;
+}
+
+.registryGs {
+    border-top-color: #f2a900;
+}
+
+.registryPlanvivo {
+    border-top-color: #8b4513;
+}
+
+.stdMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.stdRegistry {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    background: var(--brand-light);
+    color: var(--text-main);
+}
+
+.stdType {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: var(--font-heading);
+    font-weight: 600;
+}
+
+.stdCode {
+    font-size: 1.2rem;
+    color: var(--brand-blue);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.stdTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.stdDesc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.stdActions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.btnPdf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: var(--text-main);
+    font-weight: 600;
+    padding: 0.8rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.btnPdf:hover {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+}
+
+.iconPdf {
+    color: #dc3545;
+    font-weight: bold;
+}
