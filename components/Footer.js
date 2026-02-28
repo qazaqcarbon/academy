@@ -19,16 +19,22 @@ export default function Footer() {
                     <Link href="/#about">Почему мы?</Link>
                     <Link href="/calculator">Калькулятор</Link>
                     <Link href="/standards">Справочник стандартов</Link>
+                    <a href="https://qazaqcarbon.com" target="_blank" rel="noopener noreferrer">Главный сайт</a>
+                </div>
+                <div className="footer-links">
+                    <h4>Правовая информация</h4>
+                    <a href="https://qazaqcarbon.com/privacy" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a>
+                    <a href="https://qazaqcarbon.com/terms" target="_blank" rel="noopener noreferrer">Пользовательское соглашение</a>
                 </div>
                 <div className="footer-contact">
                     <h4>Свяжитесь с нами</h4>
                     <p>info@qazaqcarbon.com</p>
                     <p>www.qazaqcarbon.com</p>
-                    <Link href="#" className="btn btn-primary btn-small mt-2">Заказать аудит</Link>
+                    <a href="https://qazaqcarbon.com/contact" className="btn btn-primary btn-small mt-2">Оставить заявку</a>
                 </div>
             </div>
             <div className="footer-bottom">
-                <p>&copy; 2026 Qazaq Carbon (бренд ТОО SF Analytics). Все права защищены. Интерактивная платформа "Qazaq Carbon Academy".</p>
+                <p>&copy; {new Date().getFullYear()} Qazaq Carbon (бренд ТОО «SF Analytics»). Все права защищены. Интерактивная платформа &quot;Qazaq Carbon Academy&quot;.</p>
             </div>
         </footer>
     );
