@@ -6,8 +6,13 @@ export default {
         {
             name: 'title',
             type: 'string',
-            title: 'Заголовок (H1)',
+            title: 'Заголовок (RU)',
             validation: Rule => Rule.required()
+        },
+        {
+            name: 'title_en',
+            type: 'string',
+            title: 'Title (EN)',
         },
         {
             name: 'slug',
@@ -34,12 +39,22 @@ export default {
         {
             name: 'badgeText',
             type: 'string',
-            title: 'Текст Бейджа (напр. Verra VM0047, Экологический Кодекс)'
+            title: 'Текст Бейджа (RU) (напр. Verra VM0047, Экологический Кодекс)'
+        },
+        {
+            name: 'badgeText_en',
+            type: 'string',
+            title: 'Badge Text (EN)',
         },
         {
             name: 'subtitle',
             type: 'text',
-            title: 'Краткое описание (Подзаголовок)'
+            title: 'Краткое описание (RU) (Подзаголовок)'
+        },
+        {
+            name: 'subtitle_en',
+            type: 'text',
+            title: 'Subtitle (EN)',
         },
         {
             name: 'bgImage',
@@ -52,7 +67,19 @@ export default {
         {
             name: 'content',
             type: 'array',
-            title: 'Содержание статьи',
+            title: 'Содержание статьи (RU)',
+            of: [
+                { type: 'block' },
+                { type: 'image' },
+                { type: 'infoBox' },
+                { type: 'orgCard' },
+                { type: 'timeline' }
+            ]
+        },
+        {
+            name: 'content_en',
+            type: 'array',
+            title: 'Article Content (EN)',
             of: [
                 { type: 'block' },
                 { type: 'image' },

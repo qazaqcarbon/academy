@@ -6,19 +6,30 @@ export default {
         {
             name: 'icon',
             type: 'string',
-            title: 'Иконка (Эмодзи или текст, например 💻 или 🏛️)',
+            title: 'Иконка (Эмодзи или текст)',
             validation: Rule => Rule.required()
         },
         {
             name: 'title',
             type: 'string',
-            title: 'Название организации',
+            title: 'Название (RU)',
             validation: Rule => Rule.required()
+        },
+        {
+            name: 'title_en',
+            type: 'string',
+            title: 'Name (EN)',
         },
         {
             name: 'content',
             type: 'array',
-            title: 'Описание функций',
+            title: 'Описание функций (RU)',
+            of: [{ type: 'block' }]
+        },
+        {
+            name: 'content_en',
+            type: 'array',
+            title: 'Description (EN)',
             of: [{ type: 'block' }]
         }
     ],
@@ -30,7 +41,7 @@ export default {
         prepare(selection) {
             const { title, subtitle } = selection
             return {
-                title: `Карточка: ${title}`,
+                title: `RU: ${title}`,
                 subtitle: subtitle
             }
         }

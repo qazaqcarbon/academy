@@ -19,9 +19,20 @@ export default {
                         {
                             name: 'description',
                             type: 'text',
-                            title: 'Описание'
+                            title: 'Описание (RU)'
+                        },
+                        {
+                            name: 'description_en',
+                            type: 'text',
+                            title: 'Description (EN)'
                         }
-                    ]
+                    ],
+                    preview: {
+                        select: {
+                            title: 'year',
+                            subtitle: 'description'
+                        }
+                    }
                 }
             ]
         }

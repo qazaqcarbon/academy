@@ -5,17 +5,16 @@ import { client } from "../../../../sanity/client";
 import { urlFor } from "../../../../sanity/imageBuilder";
 import { PortableText } from "@portabletext/react";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 
 // Настройка стилей для редактора PortableText
 const ptComponents = {
     types: {
         image: ({ value }) => {
-            if (!value?.asset?._ref) {
-                return null;
-            }
+            if (!value?.asset?._ref) return null;
             return (
                 <img
-                    alt={value.alt || "Иллюстрация к статье"}
+                    alt={value.alt || "Article illustration"}
                     loading="lazy"
                     src={urlFor(value).width(1000).url()}
                     className={styles.articleImage}
@@ -50,8 +49,8 @@ const ptComponents = {
     },
     block: {
         h2: ({ children }) => {
-            // Генерируем ID из текста для оглавления
-            const id = children[0]?.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-а-я]/g, '');
+            const text = children?.[0];
+            const id = typeof text === 'string' ? text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-а-я]/g, '') : 'section';
             return <h2 id={id}>{children}</h2>;
         },
         h3: ({ children }) => <h3>{children}</h3>,
@@ -67,10 +66,8 @@ const ptComponents = {
     }
 };
 
-// Функция для извлечения заголовков H2 и создания Оглавления (TOC)
 function extractTOC(contentBlocks = []) {
     if (!Array.isArray(contentBlocks)) return [];
-
     return contentBlocks
         .filter(block => block._type === 'block' && block.style === 'h2')
         .map(block => {
@@ -80,50 +77,54 @@ function extractTOC(contentBlocks = []) {
         });
 }
 
-
 export async function generateMetadata(props) {
     const params = await props.params;
-    const { slug } = params;
-    const article = await client.fetch(`*[_type == "article" && slug.current == $slug][0]`, { slug });
+    const { slug, locale } = params;
 
-    if (!article) return { title: "Статья не найдена" };
+    // Fetch original title and localized version
+    const article = await client.fetch(`*[_type == "article" && slug.current == $slug][0]{ title, title_en, subtitle, subtitle_en }`, { slug });
+
+    if (!article) return { title: locale === 'ru' ? "Статья не найдена" : "Article not found" };
+
+    const displayTitle = (locale === 'en' && article.title_en) ? article.title_en : article.title;
+    const displaySubtitle = (locale === 'en' && article.subtitle_en) ? article.subtitle_en : article.subtitle;
 
     return {
-        title: `${article.title} | Qazaq Carbon Academy`,
-        description: article.subtitle,
+        title: `${displayTitle} | Qazaq Carbon Academy`,
+        description: displaySubtitle,
     };
 }
 
 export default async function ArticlePage(props) {
     const params = await props.params;
-    const { slug } = params;
+    const { slug, locale } = params;
+    const t = await getTranslations("Article");
 
-    // Получаем статью из Sanity
+    // Fetch original and localized fields
     const article = await client.fetch(`*[_type == "article" && slug.current == $slug][0]`, { slug });
 
-    if (!article) {
-        notFound();
-    }
+    if (!article) notFound();
 
-    // Создаем динамическое оглавление
-    const toc = extractTOC(article.content);
+    const displayTitle = (locale === 'en' && article.title_en) ? article.title_en : article.title;
+    const displaySubtitle = (locale === 'en' && article.subtitle_en) ? article.subtitle_en : article.subtitle;
+    const displayBadge = (locale === 'en' && article.badgeText_en) ? article.badgeText_en : (article.badgeText || (article.category === 'standard' ? t("defaultBadgeStandard") : t("defaultBadgeAcademy")));
+    const displayContent = (locale === 'en' && article.content_en && article.content_en.length > 0) ? article.content_en : article.content;
 
-    // Достаем картинку, если есть
+    const toc = extractTOC(displayContent);
     const bgImageUrl = article.bgImage ? urlFor(article.bgImage).width(2000).url() : null;
 
     return (
         <ArticleLayout
-            badgeText={article.badgeText || (article.category === 'standard' ? "Стандарт VCM" : "Академия")}
+            badgeText={displayBadge}
             badgeBg={article.category === 'standard' ? "rgba(45, 77, 124, 0.2)" : "rgba(45, 194, 107, 0.2)"}
             badgeColor={article.category === 'standard' ? "var(--brand-blue)" : "#2dc26b"}
-            title={article.title}
-            subtitle={article.subtitle}
-            toc={toc.length > 0 ? toc : [{ id: "content", label: "Начало" }]}
+            title={displayTitle}
+            subtitle={displaySubtitle}
+            toc={toc.length > 0 ? toc : [{ id: "content", label: t("defaultStart") }]}
             bgImage={bgImageUrl}
             showPdfAction={false}
         >
-            {/* Главный контент из Sanity CMS */}
-            <PortableText value={article.content} components={ptComponents} />
+            <PortableText value={displayContent} components={ptComponents} />
         </ArticleLayout>
     );
 }

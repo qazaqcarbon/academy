@@ -3,6 +3,8 @@ import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schema } from './sanity/schema'
 import { apiVersion, dataset, projectId } from './sanity/env'
+import { TranslateAction } from './sanity/actions/TranslateAction'
+
 
 export default defineConfig({
     basePath: '/studio',
@@ -13,4 +15,13 @@ export default defineConfig({
         structureTool(),
         visionTool({ defaultApiVersion: apiVersion }),
     ],
+    document: {
+        actions: (prev, context) => {
+            if (context.schemaType === 'article') {
+                return [...prev, TranslateAction]
+            }
+            return prev
+        }
+    }
 })
+

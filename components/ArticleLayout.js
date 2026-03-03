@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./Article.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function ArticleLayout({
     badgeText,
@@ -16,10 +17,10 @@ export default function ArticleLayout({
     showPdfAction = true
 }) {
     const pathname = usePathname();
+    const t = useTranslations("Article");
     const [activeId, setActiveId] = useState("");
 
     useEffect(() => {
-        // Simple intersection observer to highlight TOC
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -48,7 +49,6 @@ export default function ArticleLayout({
                 behavior: 'smooth'
             });
         }
-        // Update hash silently
         if (history.pushState) {
             history.pushState(null, null, `#${id}`);
         } else {
@@ -74,7 +74,7 @@ export default function ArticleLayout({
             <section className="section bg-light" style={{ paddingTop: 0 }}>
                 <div className={`container ${styles.articleGrid}`}>
                     <aside className={styles.articleSidebar}>
-                        <h3 className={styles.tocTitle}>Содержание</h3>
+                        <h3 className={styles.tocTitle}>{t("tocTitle")}</h3>
                         <ul className={styles.tocList}>
                             {toc.map(item => (
                                 <li key={item.id}>
@@ -91,7 +91,7 @@ export default function ArticleLayout({
                         {showPdfAction && (
                             <div className={styles.sidebarAction}>
                                 <a href="#" className="btn btn-primary" style={{ width: '100%', textAlign: 'center', padding: '0.8rem', fontSize: '0.9rem' }}>
-                                    📄 Скачать PDF оригинал
+                                    {t("downloadPdf")}
                                 </a>
                             </div>
                         )}

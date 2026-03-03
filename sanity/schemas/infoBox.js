@@ -6,13 +6,23 @@ export default {
         {
             name: 'title',
             type: 'string',
-            title: 'Заголовок блока (опционально, например "💡 Итог:")'
+            title: 'Заголовок блока (RU)'
+        },
+        {
+            name: 'title_en',
+            type: 'string',
+            title: 'Block Title (EN)'
         },
         {
             name: 'content',
             type: 'text',
-            title: 'Текст',
+            title: 'Текст (RU)',
             validation: Rule => Rule.required()
+        },
+        {
+            name: 'content_en',
+            type: 'text',
+            title: 'Content Text (EN)'
         },
         {
             name: 'color',

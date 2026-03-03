@@ -1,0 +1,160 @@
+{
+    "Meta": {
+        "siteName": "Qazaq Carbon Academy",
+        "siteUrl": "https://academy.qazaqcarbon.com",
+        "HomePage": {
+            "title": "Qazaq Carbon Academy | Transparent VCM Standard",
+            "desc": "A clear, interactive guide to voluntary carbon market standards. Learn how strict international requirements convert into safety and profit for your farm."
+        },
+        "CalculatorPage": {
+            "title": "Carbon Potential Calculator | Qazaq Carbon Academy",
+            "desc": "Calculate the approximate number of carbon credits (tCO₂e) for your agroforestry project using IPCC (2006) methodology."
+        },
+        "StandardsPage": {
+            "title": "VCM Standards Reference | Qazaq Carbon Academy",
+            "desc": "Original Verra, Gold Standard, and Plan Vivo methodologies explained in plain language for our partners."
+        }
+    },
+    "Navbar": {
+        "howItWorks": "How it works?",
+        "academy": "Academy (VCM Basics)",
+        "standards": "Standards Reference",
+        "calculate": "Calculate Potential"
+    },
+    "Footer": {
+        "desc": "Qazaq Carbon — a platform for the development of the voluntary carbon market in Kazakhstan.",
+        "sectionsTitle": "Sections",
+        "howItWorks": "Why Us?",
+        "calculator": "Calculator",
+        "standards": "Standards Reference",
+        "mainSite": "Main Website",
+        "legalTitle": "Legal Information",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Use",
+        "contactTitle": "Contact Us",
+        "leaveRequest": "Leave a Request",
+        "copyright": "© {year} Qazaq Carbon (brand of SF Analytics LLC). All rights reserved. Interactive platform \"Qazaq Carbon Academy\"."
+    },
+    "HomePage": {
+        "Hero": {
+            "badge": "Transparent VCM Standard",
+            "title1": "Transforming your correct agro-practices",
+            "title2": "into real income",
+            "desc": "A clear, interactive guide to voluntary carbon market standards. Learn how strict international requirements convert into safety and profit for your farm.",
+            "btnCalculate": "Calculate Potential",
+            "btnLearn": "Start Learning"
+        },
+        "About": {
+            "title": "Why is the process so strict?",
+            "desc": "Approval from global verifiers requires attention to hundreds of details. We take all the complex expertise upon ourselves, leaving you with full operational transparency.",
+            "card1Icon": "🛡️",
+            "card1Title": "Risk Mitigation",
+            "card1Desc": "We take responsibility for full compliance of your project with the complex methodologies of international standards (Verra, Gold Standard).",
+            "card2Icon": "📊",
+            "card2Title": "Data Accuracy",
+            "card2Desc": "We organize the collection of required data necessary to justify the baseline and confirm project additionality.",
+            "card3Icon": "🤝",
+            "card3Title": "Confidence in results",
+            "card3Desc": "Global investors only pay for verified units. Our process guarantees that your work will be confirmed by audit."
+        },
+        "Timeline": {
+            "title": "Project Lifecycle",
+            "desc": "Interactive map: your path from initial idea to the issuance of the first carbon credits.",
+            "step1Title": "Idea and Assessment (FSA)",
+            "step1Desc": "Land potential assessment. We conduct a preliminary audit, select optimal methodology and standards (ARR, SOC).",
+            "step1Tag1": "Your task: Boundary data",
+            "step1Tag2": "Our task: FSA, Forecasts",
+            "step2Title": "Documentation Development (PDD)",
+            "step2Desc": "A multi-page project justification for the registry: why the project is important and what its baseline is.",
+            "step2Tag1": "Your task: Land history",
+            "step2Tag2": "Our task: PDD Writing",
+            "step3Title": "Validation (VVB)",
+            "step3Desc": "Independent international audit of project documentation before the project starts.",
+            "step3Tag1": "Shared task: Responding to auditor requests",
+            "step4Title": "Monitoring (MRV)",
+            "step4Desc": "Using satellite imagery (dMRV), sensors, and reports to confirm forest growth and soil improvements.",
+            "step4Tag1": "Your task: Following the plan",
+            "step4Tag2": "Our task: Data collection (MRV)"
+        },
+        "Academy": {
+            "title": "Academy (VCM Basics)",
+            "desc": "Key principles that you will often hear about during our collaboration.",
+            "empty": "Academy lessons haven't been loaded yet.",
+            "readLesson": "Watch Lesson ➔",
+            "defaultBadge": "Academy Lesson"
+        }
+    },
+    "Calculator": {
+        "heroBadge": "ARR Planting Calculator",
+        "heroTitle1": "Calculate",
+        "heroTitle2": "carbon potential",
+        "heroDesc": "Estimate the approximate number of carbon credits (tCO₂e) for your agroforestry project. Modeling is performed using IPCC (2006) methodology.",
+        "formTitle": "Site Parameters",
+        "projectTypeLabel": "Project Type",
+        "projectTypeArr": "Reforestation / Afforestation (ARR)",
+        "projectTypeAgroforest": "Agroforestry (trees + crops)",
+        "projectTypeWindbreak": "Shelterbelts / Windbreaks",
+        "climateZoneLabel": "Climate Zone / Region",
+        "climateZoneArid": "Arid (Kyzylorda, Aral, Turkestan)",
+        "climateZoneSemiarid": "Semi-arid (Aktobe, Kostanay, Pavlodar)",
+        "climateZoneSteppe": "Steppe (Akmola, Karaganda, NKO)",
+        "climateZoneMountain": "Mountain / Subalpine (Almaty, EKO)",
+        "areaLabel": "Planting Area (hectares)",
+        "areaUnit": "ha",
+        "densityLabel": "Planting Density (trees / ha)",
+        "lifeLabel": "Project duration (years)",
+        "lifeUnit": "years",
+        "speciesLabel": "Tree species (choose at least 5)",
+        "speciesWarning": "⚠ Please choose at least 5 species. (This increases forest resilience and increases sequestration).",
+        "calcButton": "Calculate Online",
+        "calcNote": "Modeling is based on IPCC (2006) biomass growth coefficients. Data is indicative for decision-making. Accurate calculation is possible only after PDD development.",
+        "placeholderText": "Enter your site parameters on the left and click \"Calculate Online\"",
+        "resultsTitle": "Calculation Results",
+        "cardCarbonLabel": "Sequestered Carbon (Biomass)",
+        "cardCarbonUnit": "tons of carbon (tC) by {years}th year",
+        "cardCO2Label": "Carbon credits (CO₂ equivalent)",
+        "cardCO2Unit": "Possible tCO₂e by {years}th year",
+        "cardAnnualLabel": "Average annual quota",
+        "cardAnnualUnit": "tCO₂e / year",
+        "cardTreesLabel": "Number of seedlings",
+        "cardTreesUnit": "trees",
+        "barTitle": "Carbon accumulation (tC)",
+        "methodTitle": "About Methodology",
+        "methodDesc": "Calculation is based on IPCC 2006 (moderate/arid climate). Conversion: C → CO₂e × 3.667. Only above-ground tree biomass is included. Reduction coefficients applied for types: agroforestry (×0.62) and windbreaks (×0.55). Species diversity (≥5) positively affects the calculation.",
+        "typeNames": {
+            "arr": "Reforestation (ARR)",
+            "agroforest": "Agroforestry",
+            "windbreak": "Windbreaks"
+        },
+        "zoneNames": {
+            "arid": "Arid",
+            "semiarid": "Semi-arid",
+            "steppe": "Steppe",
+            "mountain": "Mountain / Subalpine"
+        },
+        "yearLabel": "{years} years",
+        "speciesCount": "{count} species"
+    },
+    "Standards": {
+        "heroBadge": "VCM Knowledge Base",
+        "heroTitle": "Standards Reference",
+        "heroDesc": "Original methodologies (PDF) of leading international registries and their brief summary to plain language for our partners.",
+        "filterAll": "All Standards",
+        "filterVerra": "Verra (VCS)",
+        "filterGs": "Gold Standard",
+        "filterPv": "Plan Vivo",
+        "readArticle": "Read plain-language breakdown",
+        "downloadPdf": "📄 Download original (PDF)",
+        "emptyFilter": "Standards for this registry haven't been added yet.",
+        "howToTitle": "Instructions for documents",
+        "howToDesc": "Original English-language PDF documents are primarily intended for our engineers and auditors. For your convenience, we have prepared brief summaries via the",
+        "howToBtnHint": "«Read plain-language breakdown» button"
+    },
+    "Article": {
+        "tocTitle": "Contents",
+        "downloadPdf": "📄 Download PDF Original",
+        "defaultStart": "Start",
+        "defaultBadgeStandard": "VCM Standard",
+        "defaultBadgeAcademy": "Academy"
+    }
+}
