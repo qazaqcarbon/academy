@@ -1,4 +1,5 @@
 import "../globals.css";
+import Script from 'next/script';
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { NextIntlClientProvider } from 'next-intl';
@@ -47,6 +48,20 @@ export default async function SiteLayout({ children, params }) {
   return (
     <html lang={locale}>
       <head>
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-HSCTG8CTJR"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-HSCTG8CTJR');
+          `}
+        </Script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
