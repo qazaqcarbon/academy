@@ -33,6 +33,14 @@ export async function generateMetadata({ params }) {
       siteName: "Qazaq Carbon Academy",
       locale: locale === "ru" ? "ru_RU" : "en_US",
       type: "website",
+      images: [
+        {
+          url: `${SITE_URL}/og.png`,
+          width: 1200,
+          height: 630,
+          alt: "Qazaq Carbon Academy",
+        },
+      ],
     },
     robots: {
       index: true,
