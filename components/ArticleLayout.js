@@ -88,13 +88,7 @@ export default function ArticleLayout({
                                 </li>
                             ))}
                         </ul>
-                        {showPdfAction && (
-                            <div className={styles.sidebarAction}>
-                                <a href="#" className="btn btn-primary" style={{ width: '100%', textAlign: 'center', padding: '0.8rem', fontSize: '0.9rem' }}>
-                                    {t("downloadPdf")}
-                                </a>
-                            </div>
-                        )}
+
                     </aside>
 
                     <article className={styles.articleContent}>

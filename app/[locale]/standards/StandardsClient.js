@@ -83,9 +83,7 @@ export default function StandardsClient({ standards }) {
                                             <Link href={`/article/${std.slug.current}`} className="btn btn-secondary" style={{ textAlign: 'center', borderColor: 'var(--brand-blue)', color: 'var(--brand-blue)' }}>
                                                 {t("readArticle")}
                                             </Link>
-                                            <a href="#" className={styles.btnPdf}>
-                                                <span className={styles.iconPdf}>📄</span> {t("downloadPdf")}
-                                            </a>
+
                                         </div>
                                     </div>
                                 </RevealOnScroll>
