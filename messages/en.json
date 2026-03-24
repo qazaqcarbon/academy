@@ -142,7 +142,7 @@
         "priceUnit": "$ / tCO₂e",
         "incomeTotal": "Total Revenue",
         "incomeAnnual": "Annual Average",
-        "incomeExplanation": "* Prices reflect market volume-weighted averages (VCM) and are loaded dynamically. The real credit price depends on PDD quality, the chosen registry (e.g. Verra), and extra co-benefits."
+        "incomeExplanation": "* For NbS (Nature-based Solutions) projects with high social impact and contribution to Sustainable Development Goals (SDG), VCM pricing is significantly higher than the market average. Such projects (including agroforestry and drought-resistant planting) are traded with a 'quality premium', as corporate buyers seek to minimize reputational risks."
     },
     "Standards": {
         "heroBadge": "VCM Knowledge Base",
