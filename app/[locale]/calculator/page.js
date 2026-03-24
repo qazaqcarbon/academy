@@ -250,7 +250,7 @@ export default function CalculatorPage() {
                                     <>
                                         <div className={styles.resultsHeader}>
                                             <h3>{t("resultsTitle")}</h3>
-                                            <p>{typeNames[results.type]} · {zoneNames[results.zone]} · {results.area} {t("areaUnit")} · {results.years} {t("lifeUnit")} · {results.checkedSpecies} {t("speciesCount", { count: results.checkedSpecies })}</p>
+                                            <p>{typeNames[results.type]} · {zoneNames[results.zone]} · {results.area} {t("areaUnit")} · {results.years} {t("lifeUnit")} · {t("speciesCount", { count: results.checkedSpecies })}</p>
                                         </div>
                                         <div className={`${styles.resultCard} ${styles.visible}`} style={{ borderLeftColor: 'var(--brand-blue)' }}>
                                             <div className={styles.resultLabel}>{t("cardCarbonLabel")}</div>
