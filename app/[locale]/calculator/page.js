@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./calculator.module.css";
 import RevealOnScroll from "../../../components/RevealOnScroll";
 import { useTranslations } from "next-intl";
+import { client } from "../../../sanity/client";
 
 const speciesData = {
     arid: [
@@ -75,12 +76,27 @@ export default function CalculatorPage() {
     const t = useTranslations("Calculator");
     const [projectType, setProjectType] = useState("arr");
     const [climateZone, setClimateZone] = useState("arid");
-    const [area, setArea] = useState(42);
+    const [area, setArea] = useState(1000);
     const [density, setDensity] = useState(833);
     const [life, setLife] = useState(40);
     const [selectedSpecies, setSelectedSpecies] = useState([]);
     const [showWarning, setShowWarning] = useState(false);
     const [results, setResults] = useState(null);
+    const [marketPrices, setMarketPrices] = useState({ low: 5, base: 15, high: 30 });
+
+    useEffect(() => {
+        async function fetchPrices() {
+            try {
+                const data = await client.fetch(`*[_type == "carbonPrices"][0]`);
+                if (data && data.low && data.base && data.high) {
+                    setMarketPrices({ low: data.low, base: data.base, high: data.high });
+                }
+            } catch (err) {
+                console.error("Failed to load prices", err);
+            }
+        }
+        fetchPrices();
+    }, []);
 
     useEffect(() => {
         setSelectedSpecies([]);
@@ -185,7 +201,7 @@ export default function CalculatorPage() {
                                 <div className={styles.formGroup}>
                                     <label>{t("areaLabel")}</label>
                                     <div className={styles.rangeWrap}>
-                                        <input type="range" min="1" max="500" value={area} onChange={(e) => setArea(Number(e.target.value))} style={{ '--val': `${((area - 1) / 499) * 100}%` }} />
+                                        <input type="range" min="1" max="5000" value={area} onChange={(e) => setArea(Number(e.target.value))} style={{ '--val': `${((area - 1) / 4999) * 100}%` }} />
                                         <span className={styles.rangeVal}>{area} {t("areaUnit")}</span>
                                     </div>
                                 </div>
@@ -261,15 +277,24 @@ export default function CalculatorPage() {
                                         <div className={styles.timelineBar}>
                                             <h4>{t("barTitle")}</h4>
                                             <div className={styles.timelineYears}>
-                                                {[10, 20, 30, 40, 50, 60, 80, 100].filter(y => y <= results.years + 10).map((year) => {
-                                                    const cVal = interpolateBiomass(results.zone, year) * results.area * { arr: 1.0, agroforest: 0.62, windbreak: 0.55 }[results.type];
-                                                    const maxC = interpolateBiomass(results.zone, Math.min(results.years + 10, 100)) * results.area * { arr: 1.0, agroforest: 0.62, windbreak: 0.55 }[results.type];
+                                                {[5, 10, 15, 20, 25, 30, 35, 40].filter(y => y <= results.years + 5).map((year) => {
+                                                    const baseCarbon = interpolateBiomass(results.zone, year);
+                                                    const typeMod = { arr: 1.0, agroforest: 0.62, windbreak: 0.55 }[results.type];
+                                                    const densityMod = Math.min(Math.max(results.density / 833, 0.4), 1.8);
+                                                    const speciesBonus = 1 + (results.checkedSpecies >= 5 ? results.checkedSpecies - 5 : 0) * 0.02;
+                                                    
+                                                    const cVal = baseCarbon * typeMod * densityMod * speciesBonus * results.area;
+                                                    const co2eVal = cVal * 3.667;
+                                                    
+                                                    const maxNodeC = interpolateBiomass(results.zone, Math.min(results.years + 5, 40));
+                                                    const maxC = maxNodeC * typeMod * densityMod * speciesBonus * results.area;
+                                                    
                                                     const h = Math.max(4, (cVal / (maxC * 1.1)) * 80);
-                                                    return <div key={year} className={styles.timelineYear} style={{ height: `${h}px`, opacity: year <= results.years ? 1 : 0.4 }}></div>;
+                                                    return <div key={year} className={styles.timelineYear} data-tip={`${co2eVal.toFixed(0)} tCO₂e`} style={{ height: `${h}px`, opacity: year <= results.years ? 1 : 0.4 }}></div>;
                                                 })}
                                             </div>
                                             <div className={styles.timelineLabels}>
-                                                {[10, 20, 30, 40, 50, 60, 80, 100].filter(y => y <= results.years + 10).map((year) => (
+                                                {[5, 10, 15, 20, 25, 30, 35, 40].filter(y => y <= results.years + 5).map((year) => (
                                                     <span key={year}>{t("yearLabel", { years: year })}</span>
                                                 ))}
                                             </div>
@@ -277,6 +302,56 @@ export default function CalculatorPage() {
                                         <div className={styles.methodology}>
                                             <h4>{t("methodTitle")}</h4>
                                             <p>{t("methodDesc")}</p>
+                                        </div>
+
+                                        <div className={styles.incomeSection}>
+                                            <h3>{t("incomeTitle")}</h3>
+                                            <p className={styles.incomeDesc}>{t("incomeDesc")}</p>
+                                            
+                                            <div className={styles.incomeCards}>
+                                                <div className={styles.incomeCard}>
+                                                    <div className={styles.incomeHeader}>{t("priceLowName")}</div>
+                                                    <div className={styles.priceTag}>${marketPrices.low} <span style={{fontSize: '0.8rem', fontWeight: 500, color: 'var(--text-muted)'}}>/ tCO₂e</span></div>
+                                                    <div className={styles.incomeValue}>
+                                                        <div className={styles.incomeLabel}>{t("incomeTotal")}</div>
+                                                        <div className={styles.incomeNum}>${(results.totalCO2e * marketPrices.low).toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
+                                                    </div>
+                                                    <div className={styles.incomeAnnual}>
+                                                        <span>{t("incomeAnnual")}</span>
+                                                        <strong>${((results.totalCO2e * marketPrices.low) / results.years).toLocaleString('en-US', {maximumFractionDigits: 0})}</strong>
+                                                    </div>
+                                                </div>
+
+                                                <div className={`${styles.incomeCard} ${styles.incomeBase}`}>
+                                                    <div className={styles.incomeHeader}>{t("priceBaseName")}</div>
+                                                    <div className={styles.priceTag} style={{color: 'var(--brand-yellow)'}}>${marketPrices.base} <span style={{fontSize: '0.8rem', fontWeight: 500, color: 'rgba(255, 255, 255, 0.7)'}}>/ tCO₂e</span></div>
+                                                    <div className={styles.incomeValue}>
+                                                        <div className={styles.incomeLabel}>{t("incomeTotal")}</div>
+                                                        <div className={styles.incomeNum} style={{color: 'white'}}>${(results.totalCO2e * marketPrices.base).toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
+                                                    </div>
+                                                    <div className={styles.incomeAnnual}>
+                                                        <span>{t("incomeAnnual")}</span>
+                                                        <strong style={{color: 'white'}}>${((results.totalCO2e * marketPrices.base) / results.years).toLocaleString('en-US', {maximumFractionDigits: 0})}</strong>
+                                                    </div>
+                                                </div>
+
+                                                <div className={styles.incomeCard}>
+                                                    <div className={styles.incomeHeader}>{t("priceHighName")}</div>
+                                                    <div className={styles.priceTag}>${marketPrices.high} <span style={{fontSize: '0.8rem', fontWeight: 500, color: 'var(--text-muted)'}}>/ tCO₂e</span></div>
+                                                    <div className={styles.incomeValue}>
+                                                        <div className={styles.incomeLabel}>{t("incomeTotal")}</div>
+                                                        <div className={styles.incomeNum}>${(results.totalCO2e * marketPrices.high).toLocaleString('en-US', {maximumFractionDigits: 0})}</div>
+                                                    </div>
+                                                    <div className={styles.incomeAnnual}>
+                                                        <span>{t("incomeAnnual")}</span>
+                                                        <strong>${((results.totalCO2e * marketPrices.high) / results.years).toLocaleString('en-US', {maximumFractionDigits: 0})}</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div className={styles.note} style={{marginTop: '1.5rem', opacity: 0.8}}>
+                                                {t("incomeExplanation")}
+                                            </div>
                                         </div>
                                     </>
                                 )}

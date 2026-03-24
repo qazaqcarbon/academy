@@ -133,7 +133,16 @@
             "mountain": "Mountain / Subalpine"
         },
         "yearLabel": "{years} years",
-        "speciesCount": "{count} species"
+        "speciesCount": "{count} species",
+        "incomeTitle": "Potential Income (tCO₂e sales)",
+        "incomeDesc": "Estimated revenue based on different carbon credit price scenarios in the voluntary carbon market (VCM).",
+        "priceLowName": "Conservative Scenario",
+        "priceBaseName": "Base Scenario",
+        "priceHighName": "Optimistic Scenario",
+        "priceUnit": "$ / tCO₂e",
+        "incomeTotal": "Total Revenue",
+        "incomeAnnual": "Annual Average",
+        "incomeExplanation": "* Prices reflect market volume-weighted averages (VCM) and are loaded dynamically. The real credit price depends on PDD quality, the chosen registry (e.g. Verra), and extra co-benefits."
     },
     "Standards": {
         "heroBadge": "VCM Knowledge Base",
