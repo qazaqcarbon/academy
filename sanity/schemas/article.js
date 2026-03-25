@@ -37,6 +37,21 @@ export default {
             validation: Rule => Rule.required()
         },
         {
+            name: 'registry',
+            type: 'string',
+            title: 'Регистр / Стандарт (Бейдж слева)',
+            description: 'Выберите регистр, чтобы окрасить левый бейдж в правильный цвет (Verra, Gold Standard, PLAN VIVO, OFP и др.)',
+            options: {
+                list: [
+                    { title: 'Включить в Verra', value: 'verra' },
+                    { title: 'Включить в Gold Standard', value: 'gs' },
+                    { title: 'Включить в Plan Vivo', value: 'pv' },
+                    { title: 'Включить в Open Forest Protocol (OFP)', value: 'ofp' },
+                    { title: 'Без регистра (Просто Стандарт)', value: 'none' }
+                ]
+            }
+        },
+        {
             name: 'badgeText',
             type: 'string',
             title: 'Текст Бейджа (RU) (напр. Verra VM0047, Экологический Кодекс)'

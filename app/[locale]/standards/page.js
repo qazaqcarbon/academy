@@ -16,7 +16,8 @@ export default async function StandardsPage() {
             slug,
             subtitle,
             badgeText,
-            category
+            category,
+            registry
         }
     `);
 
