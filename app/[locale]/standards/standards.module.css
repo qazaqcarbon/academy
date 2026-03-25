@@ -78,6 +78,10 @@
     border-top-color: #8b4513;
 }
 
+.registryOfp {
+    border-top-color: #0284c7;
+}
+
 .stdMeta {
     display: flex;
     justify-content: space-between;

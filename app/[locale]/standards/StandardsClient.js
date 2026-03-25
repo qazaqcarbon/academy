@@ -86,6 +86,7 @@ export default function StandardsClient({ standards }) {
                                 registryStyle = { background: '#fce8e6', color: '#c5221f' };
                                 registryName = "Plan Vivo";
                             } else if (category === 'ofp') {
+                                registryClass = styles.registryOfp;
                                 registryStyle = { background: '#e0f2fe', color: '#0284c7' };
                                 registryName = "OFP";
                             }
