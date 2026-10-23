@@ -7,6 +7,8 @@ import { PortableText } from "@portabletext/react";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
+const SITE_URL = "https://academy.qazaqcarbon.com";
+
 // Настройка стилей для редактора PortableText
 const ptComponents = {
     types: {
@@ -79,25 +81,104 @@ function extractTOC(contentBlocks = []) {
 
 export async function generateMetadata(props) {
     const params = await props.params;
-    const { slug, locale } = params;
+    const { slug, locale: rawLocale } = params;
+    const locale = rawLocale === 'en' ? 'en' : 'ru';
 
     // Fetch original title and localized version
-    const article = await client.fetch(`*[_type == "article" && slug.current == $slug][0]{ title, title_en, subtitle, subtitle_en }`, { slug });
+    const article = await client.fetch(
+        `*[_type == "article" && slug.current == $slug][0]{
+            title,
+            title_en,
+            subtitle,
+            subtitle_en,
+            "hasEnContent": count(content_en) > 0
+        }`,
+        { slug }
+    );
 
     if (!article) return { title: locale === 'ru' ? "Статья не найдена" : "Article not found" };
 
+    const hasEnTranslation = Boolean(article.hasEnContent && article.title_en && article.title_en.trim() !== article.title);
     const displayTitle = (locale === 'en' && article.title_en) ? article.title_en : article.title;
     const displaySubtitle = (locale === 'en' && article.subtitle_en) ? article.subtitle_en : article.subtitle;
 
+    const ruCanonical = `${SITE_URL}/article/${slug}`;
+    const enCanonical = `${SITE_URL}/en/article/${slug}`;
+    const canonicalUrl = locale === 'en' ? enCanonical : ruCanonical;
+
+    if (locale === 'en' && !hasEnTranslation) {
+        return {
+            title: displayTitle,
+            description: displaySubtitle,
+            alternates: {
+                canonical: canonicalUrl,
+            },
+            robots: {
+                index: false,
+                follow: true,
+            },
+            openGraph: {
+                title: displayTitle,
+                description: displaySubtitle,
+                url: canonicalUrl,
+                siteName: "Qazaq Carbon Academy",
+                locale: "en_US",
+                type: "article",
+                images: [
+                    {
+                        url: `${SITE_URL}/og.png`,
+                        width: 1200,
+                        height: 630,
+                    },
+                ],
+            },
+        };
+    }
+
+    const languages = hasEnTranslation
+        ? {
+            ru: ruCanonical,
+            en: enCanonical,
+            "x-default": ruCanonical,
+        }
+        : {
+            ru: ruCanonical,
+            "x-default": ruCanonical,
+        };
+
     return {
-        title: `${displayTitle} | Qazaq Carbon Academy`,
+        title: displayTitle,
         description: displaySubtitle,
+        alternates: {
+            canonical: canonicalUrl,
+            languages,
+        },
+        robots: {
+            index: true,
+            follow: true,
+        },
+        openGraph: {
+            title: displayTitle,
+            description: displaySubtitle,
+            url: canonicalUrl,
+            siteName: "Qazaq Carbon Academy",
+            locale: locale === 'en' ? "en_US" : "ru_RU",
+            type: "article",
+            images: [
+                {
+                    url: `${SITE_URL}/og.png`,
+                    width: 1200,
+                    height: 630,
+                },
+            ],
+        },
     };
 }
 
 export default async function ArticlePage(props) {
     const params = await props.params;
-    const { slug, locale } = params;
+    const { slug, locale: rawLocale } = params;
+    const locale = rawLocale === 'en' ? 'en' : 'ru';
     const t = await getTranslations("Article");
 
     // Fetch original and localized fields
@@ -113,18 +194,42 @@ export default async function ArticlePage(props) {
     const toc = extractTOC(displayContent);
     const bgImageUrl = article.bgImage ? urlFor(article.bgImage).width(2000).url() : null;
 
+    const canonicalUrl = locale === 'en' ? `${SITE_URL}/en/article/${slug}` : `${SITE_URL}/article/${slug}`;
+
+    const articleJsonLd = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": displayTitle,
+        "description": displaySubtitle || "",
+        "inLanguage": locale,
+        "mainEntityOfPage": canonicalUrl,
+        ...(article._createdAt ? { "datePublished": article._createdAt } : {}),
+        ...(article._updatedAt ? { "dateModified": article._updatedAt } : (article._createdAt ? { "dateModified": article._createdAt } : {})),
+        "publisher": {
+            "@type": "Organization",
+            "name": "Qazaq Carbon",
+            "url": "https://qazaqcarbon.com"
+        }
+    };
+
     return (
-        <ArticleLayout
-            badgeText={displayBadge}
-            badgeBg={article.category === 'standard' ? "rgba(45, 77, 124, 0.2)" : "rgba(45, 194, 107, 0.2)"}
-            badgeColor={article.category === 'standard' ? "var(--brand-blue)" : "#2dc26b"}
-            title={displayTitle}
-            subtitle={displaySubtitle}
-            toc={toc.length > 0 ? toc : [{ id: "content", label: t("defaultStart") }]}
-            bgImage={bgImageUrl}
-            showPdfAction={false}
-        >
-            <PortableText value={displayContent} components={ptComponents} />
-        </ArticleLayout>
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+            />
+            <ArticleLayout
+                badgeText={displayBadge}
+                badgeBg={article.category === 'standard' ? "rgba(45, 77, 124, 0.2)" : "rgba(45, 194, 107, 0.2)"}
+                badgeColor={article.category === 'standard' ? "var(--brand-blue)" : "#2dc26b"}
+                title={displayTitle}
+                subtitle={displaySubtitle}
+                toc={toc.length > 0 ? toc : [{ id: "content", label: t("defaultStart") }]}
+                bgImage={bgImageUrl}
+                showPdfAction={false}
+            >
+                <PortableText value={displayContent} components={ptComponents} />
+            </ArticleLayout>
+        </>
     );
 }

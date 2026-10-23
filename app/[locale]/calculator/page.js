@@ -80,7 +80,8 @@ export default function CalculatorPage() {
     const [density, setDensity] = useState(833);
     const [life, setLife] = useState(40);
     const [selectedSpecies, setSelectedSpecies] = useState([]);
-    const [showWarning, setShowWarning] = useState(false);
+    const [calcAttempted, setCalcAttempted] = useState(false);
+    const showWarning = (selectedSpecies.length > 0 && selectedSpecies.length < 5) || (calcAttempted && selectedSpecies.length < 5);
     const [results, setResults] = useState(null);
     const [marketPrices, setMarketPrices] = useState({ low: 5, base: 15, high: 30 });
 
@@ -98,10 +99,6 @@ export default function CalculatorPage() {
         fetchPrices();
     }, []);
 
-    useEffect(() => {
-        setSelectedSpecies([]);
-    }, [climateZone]);
-
     const handleSpeciesToggle = (id) => {
         setSelectedSpecies(prev => {
             if (prev.includes(id)) return prev.filter(s => s !== id);
@@ -109,16 +106,12 @@ export default function CalculatorPage() {
         });
     };
 
-    useEffect(() => {
-        setShowWarning(selectedSpecies.length > 0 && selectedSpecies.length < 5);
-    }, [selectedSpecies]);
-
     const handleCalculate = () => {
         if (selectedSpecies.length < 5) {
-            setShowWarning(true);
+            setCalcAttempted(true);
             return;
         }
-        setShowWarning(false);
+        setCalcAttempted(false);
 
         let baseCarbon = interpolateBiomass(climateZone, life);
         const typeMod = { arr: 1.0, agroforest: 0.62, windbreak: 0.55 };
@@ -191,7 +184,7 @@ export default function CalculatorPage() {
                                 </div>
                                 <div className={styles.formGroup}>
                                     <label>{t("climateZoneLabel")}</label>
-                                    <select value={climateZone} onChange={(e) => setClimateZone(e.target.value)}>
+                                    <select value={climateZone} onChange={(e) => { setClimateZone(e.target.value); setSelectedSpecies([]); }}>
                                         <option value="arid">{t("climateZoneArid")}</option>
                                         <option value="semiarid">{t("climateZoneSemiarid")}</option>
                                         <option value="steppe">{t("climateZoneSteppe")}</option>
