@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { localizedHref, getLanguageSwitchHref } from "../lib/navigation";
 
-export default function Navbar() {
+export default function Navbar({ locale = 'ru' }) {
     const [scrolled, setScrolled] = useState(false);
     const pathname = usePathname();
     const router = useRouter();
@@ -18,17 +19,19 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const isEn = pathname.startsWith('/en');
+    const isEn = pathname.startsWith('/en') || locale === 'en';
+    const currentLocale = isEn ? 'en' : 'ru';
 
-    const toggleLanguage = () => {
-        if (isEn) {
-            router.push(pathname.replace(/^\/en/, '') || '/');
-        } else {
-            router.push('/en' + pathname);
+    const ruHref = getLanguageSwitchHref(pathname, 'ru');
+    const enHref = getLanguageSwitchHref(pathname, 'en');
+
+    const switchLocale = (targetLocale) => {
+        if (typeof document !== 'undefined') {
+            document.cookie = `NEXT_LOCALE=${targetLocale}; path=/; max-age=31536000`;
         }
+        const targetHref = getLanguageSwitchHref(pathname, targetLocale);
+        router.push(targetHref);
     };
-
-    const href = (path) => isEn ? `/en${path}` : path;
 
     return (
         <nav
@@ -41,14 +44,14 @@ export default function Navbar() {
             }}
         >
             <div className="container nav-container">
-                <Link href={href("/")} className="logo">
+                <Link href={localizedHref(currentLocale, "/")} className="logo">
                     <img src="/logo.png" alt="Qazaq Carbon" className="nav-logo-img" style={{ height: "45px" }} />
                 </Link>
                 <div className="nav-links">
-                    <Link href={href("/#about")} className="nav-link">{t("howItWorks")}</Link>
-                    <Link href={href("/#academy")} className="nav-link">{t("academy")}</Link>
+                    <Link href={localizedHref(currentLocale, "/#about")} className="nav-link">{t("howItWorks")}</Link>
+                    <Link href={localizedHref(currentLocale, "/#academy")} className="nav-link">{t("academy")}</Link>
                     <Link
-                        href={href("/standards")}
+                        href={localizedHref(currentLocale, "/standards")}
                         className="nav-link"
                         style={pathname === '/standards' || pathname === '/en/standards'
                             ? { color: "var(--brand-blue)", borderBottom: "2px solid var(--brand-blue)" }
@@ -59,21 +62,31 @@ export default function Navbar() {
                 </div>
                 <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '700', fontFamily: 'var(--font-heading)', fontSize: '14px', marginRight: '1rem' }}>
-                        <span
-                            onClick={() => router.push(pathname.replace(/^\/en/, '') || '/')}
+                        <Link
+                            href={ruHref}
+                            data-testid="lang-ru"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                switchLocale('ru');
+                            }}
                             style={{ cursor: 'pointer', color: !isEn ? 'var(--brand-blue)' : '#aaa', textDecoration: !isEn ? 'underline' : 'none' }}
                         >
                             RU
-                        </span>
+                        </Link>
                         <span style={{ color: '#ccc' }}>|</span>
-                        <span
-                            onClick={() => router.push('/en' + pathname.replace(/^\/en/, ''))}
+                        <Link
+                            href={enHref}
+                            data-testid="lang-en"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                switchLocale('en');
+                            }}
                             style={{ cursor: 'pointer', color: isEn ? 'var(--brand-blue)' : '#aaa', textDecoration: isEn ? 'underline' : 'none' }}
                         >
                             EN
-                        </span>
+                        </Link>
                     </div>
-                    <Link href={href("/calculator")} className="btn btn-primary nav-btn">{t("calculate")}</Link>
+                    <Link href={localizedHref(currentLocale, "/calculator")} className="btn btn-primary nav-btn">{t("calculate")}</Link>
                 </div>
             </div>
         </nav>

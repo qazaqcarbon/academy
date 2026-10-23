@@ -43,16 +43,14 @@ export default function ArticleLayout({
     const handleScrollTo = (e, id) => {
         e.preventDefault();
         const el = document.getElementById(id);
-        if (el) {
+        if (el && typeof window !== 'undefined') {
             window.scrollTo({
                 top: el.offsetTop - 80,
                 behavior: 'smooth'
             });
         }
-        if (history.pushState) {
-            history.pushState(null, null, `#${id}`);
-        } else {
-            location.hash = `#${id}`;
+        if (typeof window !== 'undefined' && window.history?.pushState) {
+            window.history.pushState(null, '', `#${id}`);
         }
     };
 

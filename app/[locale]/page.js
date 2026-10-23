@@ -4,12 +4,14 @@ import RevealOnScroll from "../../components/RevealOnScroll";
 import { client } from "../../sanity/client";
 import { urlFor } from "../../sanity/imageBuilder";
 import { getTranslations } from "next-intl/server";
+import { localizedHref } from "../../lib/navigation";
 
 export const revalidate = 60; // Обновлять страницу каждые 60 секунд (ISR)
 
 export default async function HomePage(props) {
   const params = await props.params;
-  const locale = params.locale || 'ru';
+  const rawLocale = params?.locale || 'ru';
+  const locale = rawLocale === 'en' ? 'en' : 'ru';
   const t = await getTranslations("HomePage");
 
   // Fetch articles and include localized fields
@@ -27,8 +29,36 @@ export default async function HomePage(props) {
     }
   `);
 
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Qazaq Carbon Academy",
+    url: locale === 'en' ? "https://academy.qazaqcarbon.com/en" : "https://academy.qazaqcarbon.com",
+    inLanguage: locale === 'en' ? "en" : "ru",
+    publisher: {
+      "@type": "Organization",
+      name: "Qazaq Carbon",
+      url: "https://qazaqcarbon.com"
+    }
+  };
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Qazaq Carbon",
+    url: "https://qazaqcarbon.com"
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
       <header className="hero">
         <div className="hero-bg-accent"></div>
         <div className="container hero-content">
@@ -41,8 +71,8 @@ export default async function HomePage(props) {
             {t("Hero.desc")}
           </p>
           <div className="hero-actions">
-            <Link href="/calculator" className="btn btn-primary btn-large">{t("Hero.btnCalculate")}</Link>
-            <Link href="#academy" className="btn btn-secondary btn-large">{t("Hero.btnLearn")}</Link>
+            <Link href={localizedHref(locale, "/calculator")} className="btn btn-primary btn-large">{t("Hero.btnCalculate")}</Link>
+            <Link href={localizedHref(locale, "/#academy")} className="btn btn-secondary btn-large">{t("Hero.btnLearn")}</Link>
           </div>
         </div>
       </header>
@@ -104,12 +134,12 @@ export default async function HomePage(props) {
                     <h4 className="step-title">{t(`Timeline.step${step}Title`)}</h4>
                     <p className="step-desc">{t(`Timeline.step${step}Desc`)}</p>
                     <div className="step-tags">
-                      {t(`Timeline.step${step}Tag1`) && (
+                      {t.has(`Timeline.step${step}Tag1`) && (
                         <span className={`tag ${step === 3 ? 'tag-shared' : 'tag-farmer'}`}>
                           {t(`Timeline.step${step}Tag1`)}
                         </span>
                       )}
-                      {t(`Timeline.step${step}Tag2`) && (
+                      {t.has(`Timeline.step${step}Tag2`) && (
                         <span className="tag tag-qazaq">
                           {t(`Timeline.step${step}Tag2`)}
                         </span>
@@ -147,7 +177,7 @@ export default async function HomePage(props) {
                       </div>
                       <h3 className="module-title">{displayTitle}</h3>
                       <p className="module-text">{displaySubtitle}</p>
-                      <Link href={`/${locale}/article/${article.slug.current}`} className="link-btn">{t("Academy.readLesson")}</Link>
+                      <Link href={localizedHref(locale, `/article/${article.slug.current}`)} className="link-btn">{t("Academy.readLesson")}</Link>
                     </div>
                   </div>
                 </RevealOnScroll>

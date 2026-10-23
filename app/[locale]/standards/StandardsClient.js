@@ -4,8 +4,9 @@ import Link from "next/link";
 import styles from "./standards.module.css";
 import RevealOnScroll from "../../../components/RevealOnScroll";
 import { useTranslations } from "next-intl";
+import { localizedHref } from "../../../lib/navigation";
 
-export default function StandardsClient({ standards }) {
+export default function StandardsClient({ standards, locale = 'ru' }) {
     const t = useTranslations("Standards");
     const [activeTab, setActiveTab] = useState("all");
 
@@ -91,20 +92,23 @@ export default function StandardsClient({ standards }) {
                                 registryName = "OFP";
                             }
 
+                            const displayTitle = (locale === 'en' && std.title_en) ? std.title_en : std.title;
+                            const displaySubtitle = (locale === 'en' && std.subtitle_en) ? std.subtitle_en : std.subtitle;
+                            const displayBadge = (locale === 'en' && std.badgeText_en) ? std.badgeText_en : (std.badgeText || "VCM Standard");
+
                             return (
                                 <RevealOnScroll key={std._id} delay={index * 0.1}>
                                     <div className={`${styles.standardCard} ${registryClass}`}>
                                         <div className={styles.stdMeta}>
                                             <span className={styles.stdRegistry} style={registryStyle}>{registryName}</span>
-                                            <span className={styles.stdType}>{std.badgeText || "VCM Standard"}</span>
+                                            <span className={styles.stdType}>{displayBadge}</span>
                                         </div>
-                                        <h3 className={styles.stdTitle}>{std.title}</h3>
-                                        <p className={styles.stdDesc}>{std.subtitle}</p>
+                                        <h3 className={styles.stdTitle}>{displayTitle}</h3>
+                                        <p className={styles.stdDesc}>{displaySubtitle}</p>
                                         <div className={styles.stdActions}>
-                                            <Link href={`/article/${std.slug.current}`} className="btn btn-secondary" style={{ textAlign: 'center', borderColor: 'var(--brand-blue)', color: 'var(--brand-blue)' }}>
+                                            <Link href={localizedHref(locale, `/article/${std.slug.current}`)} className="btn btn-secondary" style={{ textAlign: 'center', borderColor: 'var(--brand-blue)', color: 'var(--brand-blue)' }}>
                                                 {t("readArticle")}
                                             </Link>
-
                                         </div>
                                     </div>
                                 </RevealOnScroll>

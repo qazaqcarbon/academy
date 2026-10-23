@@ -1,15 +1,19 @@
 import "../globals.css";
-import Script from 'next/script';
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import AnalyticsWithConsent from "../../components/AnalyticsWithConsent";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 
 const SITE_URL = "https://academy.qazaqcarbon.com";
 
 export async function generateMetadata({ params }) {
-  const locale = (await params).locale || 'ru';
+  const resolvedParams = await params;
+  const rawLocale = resolvedParams?.locale || 'ru';
+  const locale = rawLocale === 'en' ? 'en' : 'ru';
   const t = await getTranslations({ locale, namespace: "Meta.HomePage" });
+
+  const canonicalUrl = locale === 'en' ? `${SITE_URL}/en` : `${SITE_URL}`;
 
   return {
     title: {
@@ -19,19 +23,19 @@ export async function generateMetadata({ params }) {
     description: t("desc"),
     metadataBase: new URL(SITE_URL),
     alternates: {
-      canonical: `${SITE_URL}/${locale}`,
+      canonical: canonicalUrl,
       languages: {
-        "ru": `${SITE_URL}/`,
+        "ru": `${SITE_URL}`,
         "en": `${SITE_URL}/en`,
-        "x-default": `${SITE_URL}/`,
+        "x-default": `${SITE_URL}`,
       },
     },
     openGraph: {
       title: t("title"),
       description: t("desc"),
-      url: locale === 'en' ? `${SITE_URL}/en` : SITE_URL,
+      url: canonicalUrl,
       siteName: "Qazaq Carbon Academy",
-      locale: locale === "ru" ? "ru_RU" : "en_US",
+      locale: locale === "en" ? "en_US" : "ru_RU",
       type: "website",
       images: [
         {
@@ -46,30 +50,22 @@ export async function generateMetadata({ params }) {
       index: true,
       follow: true,
     },
+    verification: {
+      yandex: "ea3d9d339b0fad07",
+    },
   };
 }
 
 export default async function SiteLayout({ children, params }) {
-  const locale = (await params).locale || 'ru';
+  const resolvedParams = await params;
+  const rawLocale = resolvedParams?.locale || 'ru';
+  const locale = rawLocale === 'en' ? 'en' : 'ru';
   const messages = await getMessages();
 
   return (
     <html lang={locale}>
       <head>
-        {/* Google tag (gtag.js) */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-HSCTG8CTJR"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-HSCTG8CTJR');
-          `}
-        </Script>
+        <meta name="yandex-verification" content="ea3d9d339b0fad07" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -79,9 +75,10 @@ export default async function SiteLayout({ children, params }) {
       </head>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <Navbar />
+          <Navbar locale={locale} />
           {children}
-          <Footer />
+          <Footer locale={locale} />
+          <AnalyticsWithConsent locale={locale} />
         </NextIntlClientProvider>
       </body>
     </html>
